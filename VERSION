@@ -1,21 +1,15 @@
-v0.1
+v0.1.1
 
-Set
-up
+Fixed
+missing
 
-basic
-dash-webapp-template
+pipreqs
+so
 
-structure
-(not
+that
+requirements.txt
 
-all
-necessary
+file
+auto
 
-files
-present
-
-just
-yet..)
-
-
+created
