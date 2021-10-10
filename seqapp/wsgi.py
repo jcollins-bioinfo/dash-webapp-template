@@ -6,7 +6,7 @@ print(gunicorn_wd, file=sys.stderr)
 
 sys.path.append(gunicorn_wd)
 
-from . import app
+from seqapp import app
 from deploy import server
 
 if __name__ == "__main__":

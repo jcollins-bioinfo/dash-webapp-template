@@ -33,9 +33,9 @@ from traceback import format_exception
 
 import dash
 import dash_bio as dashbio
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_table
+from dash import dcc
+from dash import html
+from dash import dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
@@ -51,6 +51,7 @@ import ftfy
 import io
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+# mpl.use('Qt5Agg')
 import numpy as np
 import pandas as pd
 import plotly
@@ -203,7 +204,7 @@ USERS = [{
 )
 USERS_REALNAMES = {u["value"]: u["label"].split()[0] for u in USERS}
 
-
+entity_schemas = pd.read_csv(f"{APP_HOME}/{APP_NAME}/assets/data/entity-schemas.csv", sep='\t')
 #
 #  ----| FILE HEADERS (Useful for, e.g., common DataFrames.)
 #

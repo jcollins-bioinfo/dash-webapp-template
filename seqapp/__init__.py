@@ -44,7 +44,7 @@ import sys
 # sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 import dash
-from flask_caching import Cache
+# from flask_caching import Cache
 
 logger = logging.getLogger(__name__)
 
@@ -81,15 +81,15 @@ app = dash.Dash(
 # 4   hrs =    14400
 # 1    hr =     3600
 # 10  min =      600
-TIMEOUT = 50000
-cache = Cache(
-    app.server,
-    config={
-        "CACHE_TYPE": "filesystem",  # "memcached",
-        "CACHE_DIR": "./.flask-cache/",
-        "CACHE_DEFAULT_TIMEOUT": TIMEOUT,
-    },
-)
+# TIMEOUT = 50000
+# cache = Cache(
+#     app.server,
+#     config={
+#         "CACHE_TYPE": "filesystem",  # "memcached",
+#         "CACHE_DIR": "./.flask-cache/",
+#         "CACHE_DEFAULT_TIMEOUT": TIMEOUT,
+#     },
+# )
 
 
 ########################################

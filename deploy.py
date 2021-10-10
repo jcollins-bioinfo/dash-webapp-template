@@ -1,25 +1,21 @@
-""" .::PRIMARY APPLICATION DEPLOYMENT SCRIPT::.
+#!/usr/local/bin/python3.9
+""" ## Primary Application Deployment Script
        ------------------------------------
 
-                𝕯𝖊𝖕𝖑𝖔𝖞𝖒𝖊𝖓𝖙
+        >        𝕯𝖊𝖕𝖑𝖔𝖞𝖒𝖊𝖓𝖙
         _____
 
       ᵂʳⁱᵗᵗᵉⁿ ᵇʸ
           𝕁.ℂollin𝓈
-    ___________________________________________
-    : :::  :: : : : ::::::::::: : : : ::  ::: :
+
 
     Purpose / Overview:
     ------------------
-    It is from this script the WSGI Production-
-    level   deployment   module   imports   the
-    `deploy.server` object - itself imported &
-    pulled from the `app` object — (i.e.,
-    the flask-derived [/`flask.Flask()`-esque]
-    `dash.Dash()` main "app" [object]).
-
-    For  Development-level  deployment , simply
-    run this script, like so:
+    It is from this script the WSGI Production- level   deployment   module  
+    imports   the `deploy.server` object - itself imported & pulled from the
+    `app` object — (i.e., the flask-derived [/`flask.Flask()`-esque]
+    `dash.Dash()` main "app" [object]).For  Development-level  deployment ,
+    simply run this script, like so:
 
         $ python deploy.py
 
@@ -29,40 +25,24 @@
     ----------
     quotes: list of (author, quote) tuples
 
-     𝕽𝖆𝖓𝖉𝖔𝖒𝖑𝔂  selected  little  set  of  Carl
-        Sagan (plus one or two Frederick Sanger)
-        quotes.
 
-        >𝓣hese are only ever seen on the custom
-        branded "404 Page Not Found" error page
-        which loads in response to any unexpect-
-        ed   URL   href   path  ;  for  example,
-        'localhost:9001/apps' will give a 404
-        Page Not Found ( alleviated by an immed-
-        iately obvious correct link which can
-        take a user right to the app ) .
-
-
-           𝘗𝘈𝘊𝘛 𝘗𝘩𝘢𝘳𝘮𝘢, 𝘐𝘯𝘤. © 2019-2021
-
-    : :::  :: : : : ::::::::::: : : : ::  ::: :
-    ___________________________________________
-    -------------------------------------------
+        Code written by John Collins © 2021
+          -------------------------------
 """
 import logging
 import random
 
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
 
-from app.app import app # NOTE: `app.app` should be changed to `[your new app name].app` !
+from seqapp import app # NOTE: `app.app` should be changed to `[your new app name].app` !
                         #        I.e., Don't forget to change the top-level package name.
-from . import callbacks
-from .layout import children as page_layout
-from utils import convert_html_to_dash
+from seqapp import callbacks
+from seqapp.layout import children as page_layout
+from seqapp.utils import convert_html_to_dash
 
 
 quotes = [("Carl Sagan", q) for q in [
@@ -167,7 +147,7 @@ def display_page(pathname, href, current_page):
             for tag in ["app", "dash-webapp-template"]): # allowed url href paths
         return get_main_layout()
     else:
-        with open("error-pages/404.html") as error_404:
+        with open("static/error-pages/404.html") as error_404:
             parse_404 = "".join(error_404.readlines())
             author, quote, = random.choice(quotes)
             parse_404 = (
