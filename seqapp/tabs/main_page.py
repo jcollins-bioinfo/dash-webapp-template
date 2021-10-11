@@ -61,14 +61,14 @@ updates = [
 ]
 
 navbar = [
-    html.Td(html.Img(src="", style={"width": "110%"}), style={"width": "7%"}),
+    html.Td(html.Img(src=app_logo, style={"width": "80%"}), style={"width": "7%"}),
     html.Td(
         html.Div(
             [
                 html.Div(
                     [
-                        html.Span("apps01: ", style={"color": "#878686"}),
-                        html.Span("[YOUR APP]"),
+                        html.Span("[server/network/cmpny]: ", style={"color": "#878686", "fontSize": "0.5rem"}),
+                        html.Span("[YOUR APP NAME]"),
                     ],  # ╦ ",
                     style={
                         "marginLeft": "-3%",
