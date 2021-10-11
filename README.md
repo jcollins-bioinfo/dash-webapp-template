@@ -38,8 +38,12 @@ Thus >90% of this full-stack web app is able to be written all in Python, signif
 ### After the pipeline completes, a custom report can be immediately displayed
 > For example leveraging very conveniently anything from Plotly for data visualizations to facilitate user interpretation of their results, interactive snappy fast tables (i.e., containing as many as millions of rows) with interactive functionalities such as filtering, searching, sorting - all pre-baked thanks to the open-source Dash data table library. Finally, users could interact with the displayed results and for example select certain "human QC-verified" samples whose data they could then upload properly into a central database with the click of a button. 
 
+<br>
+___________
+<br>
 
 ＊ _*A Note on Plotly's clear emphasis on their "Enterprise" services offerings:*_ 
 > _This template provided here is essentially intended to bypass entirely the need for using the enterprise services. It is definitely possible for a single person to be data scientist + full-stack developer + devops engineer (though admittedly that could get very difficult depending on the number of users; as a personal aside, my previous work experience has always involved very small numbers of users - a dozen or so at most - from the R&D departments of biotech companies). Surely, I bet the Dash Enterprise product is one worth considering, depending on the organization and their needs, etc. But nonetheless it's incredible what all can be done freely just from the open-source provided code. (Thank you Plotly Dash for intelligently embracing open source!) To be clear this template does **not** require paying for Dash Enterprise (or anything else; it's totally free and open source)._
 
 † https://community.plotly.com/t/welcoming-dash-1-0-0/25148
+
