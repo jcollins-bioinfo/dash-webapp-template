@@ -1,0 +1,29 @@
+# Overview of /dash-webapp-template/seqapp/ file structure
+
+./assets/
+---------
+Contains custom CSS, JS, and media files. The name "assets" is explicitly
+searched for by the Dash modules.
+
+./config/
+---------
+Application configuration - largely contained within the local __init__.py file.
+
+./dependencies/
+---------------
+This is purely for developer reference and is not functionally used/required.
+
+./prod/
+-------
+This gitignore'd directory contains the subfolder
+/dash-webapp-template/seqapp/prod/sessions, where all user session analysis
+files are written to and historically accumulating.
+
+./callbacks.py
+--------------
+Source code for all of the "react"-ive (i.e., dynamic / interactive) components
+on the web app UI, thus briding frontend <-> backend (all in Python).
+
+./utils.py
+----------
+Some generic utility functions.
