@@ -1,0 +1,15 @@
+16		0		./__init__.py
+244		16		./deploy.py
+101		260		./seqapp/__init__.py
+25		361		./seqapp/__main__.py
+0		386		./seqapp/assets/__init__.py
+283		386		./seqapp/bioinfo/pipeline.py
+0		669		./seqapp/bioinfo/visualization.py
+1634	669		./seqapp/callbacks.py
+306		2303	./seqapp/config/__init__.py
+26		2609	./seqapp/layout.py
+763		2635	./seqapp/tabs/main_page.py
+574		3398	./seqapp/utils.py
+27		3972	./seqapp/wsgi.py
+--------
+3999 lines of Python code total in template

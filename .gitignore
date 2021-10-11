@@ -23,6 +23,7 @@ VERSION
 #dev/
 docker/
 docs/
+html/
 index.html
 opt
 #prod/
