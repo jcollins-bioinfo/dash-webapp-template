@@ -19,10 +19,25 @@ This gitignore'd directory contains the subfolder
 /dash-webapp-template/seqapp/prod/sessions, where all user session analysis
 files are written to and historically accumulating.
 
+./tabs/
+-------
+Contains the Dash-HTML-Python style code precisely laying out every detail
+of the front-end (i.e., all the react.js components, overall organization,
+and CSS styling).
+
 ./callbacks.py
 --------------
 Source code for all of the "react"-ive (i.e., dynamic / interactive) components
-on the web app UI, thus briding frontend <-> backend (all in Python).
+on the web app UI, thus bridging frontend <-> backend (all in Python).
+
+./layout.py
+-----------
+A basic small wrapper module which feeds the Dash-HTML-Python style code from
+the './tabs/' directory - thus any app made from this template can have multiple
+different tabs filled with their own distinct react.js (but Dash/python written)
+components, all loaded in one page load and updated independently, dynamically,
+as the user navigates through any possible labryinthine series of UI decisions
+(actions; e.g., mouse clicks, etc.) during their UX of the app. 
 
 ./utils.py
 ----------
