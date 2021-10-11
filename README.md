@@ -21,6 +21,7 @@ Thus >90% of this full-stack web app is able to be written all in Python, signif
 
 
 # App Template Overview
+
 ## Main app page begins with user log-in
 > Thus creating per-session output directories where all uploaded and newly generated data files will be saved server-side, and available from the UI during the session for the user to filter through and select any they'd like to download.
 <img width="1441" alt="top of app screenshot after user log in" src="https://user-images.githubusercontent.com/28764103/136808235-446142f7-66fc-44b6-a5d8-25c436d31ebb.png">
@@ -28,7 +29,8 @@ Thus >90% of this full-stack web app is able to be written all in Python, signif
 ### A "Downloads" components section reveals live, comprehensive logging
 > All user activity is logged, as shown. Additionally, of course, all automated analysis / all custom algorithm should also be logged and can be easily achieved with the logging already set up as is in this template. 
 <img width="1405" alt="Users can download any file created by the app; including all of them, or a subselection of them by type, with a single click as a .zip archived file" src="https://user-images.githubusercontent.com/28764103/136809385-131808e0-2e14-43e0-8646-3fd56a4e7b83.png">
-### Session files will automatically be created and saved under `/seqapp/app/prod/` by date then unique SESSION_ID (or 'RUN_ID')
+
+#### Session files will automatically be created and saved under `/seqapp/app/prod/sessions/` by date then unique SESSION_ID (or 'RUN_ID'):
 <img width="538" alt="Only .log files are shown here, but typically in a fully fleshed out app, there would be many more files of various types!" src="https://user-images.githubusercontent.com/28764103/136828025-6222d3f1-8cef-4f85-88fb-b8f4971b106e.png">
 
 ## "Step One" - Query a database (e.g., via [dynamic/interactive] network API calls)
