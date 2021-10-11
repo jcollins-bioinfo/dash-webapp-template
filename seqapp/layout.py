@@ -11,11 +11,11 @@ Attributes:
     deploy.py.
     tabs (list): Dash Core Components - Tab objects
 """
-from .config import *
+from config import *
 # from tabs.faq import children as faq_tab
 # from tabs.howto import children as howto_tab
 # from tabs.links import children as links_tab
-from .tabs.main_page import children as main_tab
+from tabs.main_page import children as main_tab
 
 tabs = [
     dcc.Tab(label="dash-webapp-template", children=main_tab),

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3.7
 """MAIN APP PAGE
 Contains the principle tab of the application UI - where
 the user uploads input files, launches analyses, and interprets
@@ -26,19 +25,34 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
-from app.config import *
+from seqapp.config import *
+from seqapp.utils import ljoin
 
 version = VERSION
 updates = UPDATES
 
+app_logo = f'data:image/png;base64,{base64.b64encode(open(f"{APP_HOME}/{APP_NAME}/assets/images/dash-webapp-template-logo-light-web.png", "rb").read()).decode()}'
+
+
+updates = [u.split("Date: ") for u in updates]
 updates = [
     html.Details(
         [
-            html.Ul(
+            html.Ol(
                 [
-                    html.Li(commit_log) for commit_log in updates
+                    html.Li(
+                        [
+                            html.P(
+                                commit_log[0],
+                                style={"fontSize": "0.5rem", "fontWeight": 200},
+                            ),
+                            html.P(commit_log[1], style={"fontWeight": 400}),
+                        ]
+                    )
+                    for commit_log in updates
                 ],
                 className="updates-list",
+                reversed="reversed",
             ),
             html.Summary(html.Code("-UPDATES-", className="updates-header")),
         ],
@@ -47,36 +61,62 @@ updates = [
 ]
 
 navbar = [
-    html.Td(
-        html.Img(
-            src="",
-            style={"width": "110%"},
-        ),
-        style={"width": "7%"},
-    ),
+    html.Td(html.Img(src=app_logo, style={"width": "80%"}), style={"width": "7%"}),
     html.Td(
         html.Div(
             [
                 html.Div(
-                    [html.Span("apps01: ", style={"color": "#878686"}), html.Span("[YOUR APP]")],  # ╦ ",
-                    style={"marginLeft": "-3%", "cursor": "pointer", "marginBottom": "0.5%", "fontSize": "80%"},
+                    [
+                        html.Span("[server/network/cmpny]: ", style={"color": "#878686", "fontSize": "0.5rem"}),
+                        html.Span("[YOUR APP NAME]"),
+                    ],  # ╦ ",
+                    style={
+                        "marginLeft": "-3%",
+                        "cursor": "pointer",
+                        "marginBottom": "0.5%",
+                        "fontSize": "80%",
+                    },
                 ),
                 html.Span(html.A("Top⏎", href="#back-to-top")),
                 html.Span(" | "),
-                html.Span(html.A("Step One", href="#step-one", className="navbar-select")),
+                html.Span(
+                    html.A("Step One", href="#step-one", className="navbar-select")
+                ),
                 html.Span(" | "),
-                html.Span(html.A("Step Two (⮊Run🧬Pipeline)", href="#step-two", className="navbar-select")),  # ⧉
+                html.Span(
+                    html.A(
+                        "Step Two (⮊Run🧬Pipeline)",
+                        href="#step-two",
+                        className="navbar-select",
+                    )
+                ),  # ⧉
                 html.Span(" | "),
-                html.Span(html.A("Results", href="#mutation-calls", className="navbar-select")),
+                html.Span(
+                    html.A("Results", href="#mutation-calls", className="navbar-select")
+                ),
                 html.Span(" | "),
-                html.Span(html.A("Download Links", href="#download-links", className="navbar-select")),  # (🖥⇉🗐)
+                html.Span(
+                    html.A(
+                        "Download Links",
+                        href="#download-links",
+                        className="navbar-select",
+                    )
+                ),  # (🖥⇉🗐)
                 html.Span(" | "),
-                html.Span(html.A("Clear", href="#pipeline-progress-disclaimer", className="navbar-select")),  # (∅🖺➡🗋)
+                html.Span(
+                    html.A(
+                        "Clear",
+                        href="#pipeline-progress-disclaimer",
+                        className="navbar-select",
+                    )
+                ),  # (∅🖺➡🗋)
                 html.Div(
                     children=[
                         html.Span(
                             html.A(
-                                ["⁂ Sign In"], style={"fontSize": "80%", "color": "goldenrod"}, href=f"#log-in-below"
+                                ["⁂ Sign In"],
+                                style={"fontSize": "80%", "color": "goldenrod", "width": "fit-content"},
+                                href=f"#log-in-below",
                             )
                         )
                     ],
@@ -94,7 +134,10 @@ header = [html.Table(html.Tr(navbar)), html.Div(className="menubar-divider")]
 download_options = [{"label": "—Select Output Type—", "value": "None"}] + sorted(
     [
         {"label": "Export [Streamlined] to Geneious (GENEIOUS)", "value": "GENEIOUS"},
-        {"label": "Plasmid Maps [Full De Novo-Generated Archive] {ALL Putative TCR-α/β} (FASTA)", "value": "REF"},
+        {
+            "label": "Plasmid Maps [Full De Novo-Generated Archive] {ALL Putative TCR-α/β} (FASTA)",
+            "value": "REF",
+        },
         {
             "label": "Plasmid References [Current Session] (FASTA) {*plus*: Post-QC Consensus Sequence(s)}",
             "value": "CONSENSUS",
@@ -103,12 +146,18 @@ download_options = [{"label": "—Select Output Type—", "value": "None"}] + so
         {"label": "Reference Mapping Stats (TXT)", "value": "MAPSTATS"},
         {"label": "Raw Aggregated Input Sequences (ABI→FASTQ)", "value": "AGG_FQ"},
         {"label": "Quality Score QC Figures (PNG)", "value": "QUAL"},
-        {"label": "Reference-Mapped Reads Assembly (Sequence Alignment Map [SAM])", "value": "SEQ_ALGN"},
+        {
+            "label": "Reference-Mapped Reads Assembly (Sequence Alignment Map [SAM])",
+            "value": "SEQ_ALGN",
+        },
         {
             "label": "Annotation Files [V(D)J-Specific De Novo Full Plasmid Map Features] (BED format)",
             "value": "ANNOT",
         },
-        {"label": "Access LOGGING Records / Audit Trail [Current Session] (LOG)", "value": "LOGS"},
+        {
+            "label": "Access LOGGING Records / Audit Trail [Current Session] (LOG)",
+            "value": "LOGS",
+        },
         {"label": "All Analysis Files", "value": "ALL"},
     ],
     key=lambda d: d["label"],
@@ -138,13 +187,15 @@ components_list = [
     #    https://dash.plot.ly/dash-core-components/store  ]
     dcc.Store(id="memory", storage_type="session"),
     dcc.Store(id="local", storage_type="local"),
-    dcc.Store(
-        id="session", storage_type="session"
-    ),  # TODO: Swap use of memory vs. session id variables. (Storage type assignment is intentional as-is here.)
+    dcc.Store(id="session", storage_type="session"),
     html.Div(id="back-to-top", style={"display": "hidden"}),
-    html.Header(children=header, className="menubar", style={"width": "102%", "marginLeft": "-1%"}),
+    html.Header(
+        children=header,
+        className="menubar",
+        style={"width": "102%", "marginLeft": "-1%"},
+    ),
     html.P(
-        "Nex╬Gen Ne⌬an🜾igҽn I-O",
+        "Nex╬Gen Bi⌬informat🜾cs Web Apps",
         style={
             "lineHeight": "100%",
             "color": "#00000025",
@@ -157,14 +208,14 @@ components_list = [
     html.Div(
         [
             html.H2(
-                "♇⋀Cऄ  ╅  Bǁ◎IℕFO𓏢MA𓇰ICS",
+                "ℐ⌖ ℌ ℕ Collins — Bǁ◎IℕFO𓏢MA𓇰ICS",
                 style={
-                    "fontSize": "1.25rem",
-                    "letterSpacing": "50px",
-                    "lineHeight": "3.0rem",
+                    "fontSize": "0.67rem",
+                    "letterSpacing": "30px",
+                    "lineHeight": "2.0rem",
                     "fontFamily": "'Cinzel', serif",
                     "color": "#8b8b8b",
-                    "marginBottom": "-1.85%",
+                    "marginBottom": "-1%",
                     "textAlign": "center",
                     "marginLeft": "2.5%",
                 },
@@ -174,10 +225,15 @@ components_list = [
                 [
                     html.Pre(
                         "ୡ    ୡ        ୡୡ         ୡ         ୡ        ୡ  ୡ       ୡ     ୡ          ୡ",
-                        style={"color": "#d6d6d684", "fontSize": "1.2rem", "letterSpacing": "2px"},
+                        style={
+                            "color": "#d6d6d684",
+                            "fontSize": "1.2rem",
+                            "letterSpacing": "2px",
+                            "marginBottom": "-0.3rem",
+                        },
                     ),
                     html.Pre(
-                        "◖𓇃𓇃𓇃𓇃𓇃𓏣🜾𓏣𓇃𓇃𓉽𓇃𓐩𓋥⸶⸷𓋥𓐩𓇃𓇃𓇃𓋏𓇃𓇃𓇃˥⎡𓇃𓇃࿅𓇃𓊢ꃊ𓊢𓇃𓇃𓇃𓇃ⴶ〰⸅‖⸄〰ж𓇃𓇃𓇃𓇃𓇃𓏟𓏞𓇃𓇃𓇃𓇃𓋅𓆬𓆬𓋅𓇃𓇃𓇃𓇊𓊢𓇊𓇃𓇃𓇃𓉽𓇃ண⎤꜒𓇃𓇃𓇃𓇃𓇃࿑◗",
+                        "◖𓇃𓇃𓇃𓏣🜾𓏣𓇃𓇃𓉽𓇃𓐩𓋥⸶⸷𓋥𓐩𓇃𓋏𓇃˥⎡𓇃𓇃࿅𓇃𓊢ꃊ𓊢𓇃𓇃𓇃ⴶ〰⸅‖⸄〰ж𓇃𓇃𓏟𓏞𓇃𓇃𓇃𓇃𓋅𓆬𓆬𓋅𓇃𓇃𓇊𓊢𓇊𓇃𓉽𓇃ண⎤꜒𓇃𓇃࿑◗",
                         style={
                             "filter": "blur(.4pt)",
                             "color": "#584e00a8",
@@ -188,8 +244,12 @@ components_list = [
                         },
                     ),
                     html.Pre(
-                        "◖𓇃𓇃𓇃𓇃⸠⎫𓏉⎧⸡𓇃𓇃𓇃𓇃𓇃⸣⸠࿇⸡⸢𓇃𓇃𓇃𓇃⎨⎬𓇃𓇃𓇃𓇃𓇃𓉽𓋏𓉽𓇃𓇃𓇃ཥ⅌ཤ𓇃𓇃𓇃𓇃𓍰𓇃𓇃𓇃𓇃𓇃ཀཫ𓇃𓇃𓇃╗╔𓇃𓇃𓇃𓇃⦄༽⸶⸷༼⦃𓇃𓇃𓇃𓇃◗",
-                        style={"marginTop": "-1.5%", "fontSize": "1.8rem", "color": "#AEA46E"},
+                        "◖𓇃𓇃𓇃𓇃⸠⎫𓏉⎧⸡𓇃𓇃𓇃𓇃⸣⸠࿇⸡⸢𓇃𓇃𓇃𓇃⎨⎬𓇃𓇃𓇃𓉽𓋏𓉽𓇃𓇃ཥ⅌ཤ𓇃𓇃𓇃𓍰𓇃𓇃𓇃𓇃ཀཫ𓇃𓇃𓇃╗╔𓇃𓇃⦄༽⸶⸷༼⦃𓇃𓇃𓇃◗",
+                        style={
+                            "marginTop": "-1.5%",
+                            "fontSize": "1.55rem",
+                            "color": "#AEA46E",
+                        },
                     ),
                 ],
                 style={
@@ -211,7 +271,7 @@ components_list = [
             "lineHeight": "90%",
             "letterSpacing": "-8px",
             "marginTop": "-110px",
-            "mixBlendMode": "color-dodge",
+            "mixBlendMode": "multiply",
             "textAlign": "center",
             "cursor": "pointer",
             "zIndex": "1",
@@ -221,44 +281,56 @@ components_list = [
     html.Div(id="workflow-selection"),
     html.Span(className="fader-line-long"),
     html.H4("—Automated [Name/Function of Your App]—", style={"lineHeight": "80%"}),
-    html.H5("[Tagline-esque description for what this app does.]", className="title-description"),
-    html.Br(),
-    html.Div(
-        [
-            html.Video(
-                src="../assets/animations/rotate_DNA_HD_HB.mp4",
-                autoPlay=True,
-                loop=True,
-                controls=False,
-                preload="true",
-                muted=True,
-                className="dna-login-animation"
-            )
-        ]
+    html.H5(
+        "[Tagline-esque description for what this app does.]",
+        className="title-description",
     ),
+    html.Br(),
+    # html.Div(
+    #     [
+    #         html.Video(
+    #             src="../assets/animations/rotate_DNA_HD_HB.mp4",
+    #             autoPlay=True,
+    #             loop=True,
+    #             controls=False,
+    #             preload="true",
+    #             muted=True,
+    #             className="dna-login-animation"
+    #         )
+    #     ]
+    # ),
     html.Div(
         [
             html.H4(
                 "To Begin, Sign In Below",
                 style={
                     "textAlign": "center",
-                    "animation": "pact-gradient-text-flow 40s infinite linear",
+                    "animation": "gradient-text-flow 40s infinite linear",
                     "mixBlendMode": "multiply",
                     "fontSize": "3.0rem",
-                    "marginTop": "15px!important",
+                    # "marginTop": "15px!important",
                     "fontWeight": "300",
-                    "marginBottom": "1.1%",
+                    # "marginBottom": "1.1%",
                 },
             ),
             html.Span(
-                className="fader-line-short", style={"width": "112.5%", "marginLeft": "-6.25%", "marginTop": "-24px"}
+                className="fader-line-short",
+                style={"width": "112.5%", "marginLeft": "-6.25%"},
             ),
             dcc.RadioItems(
                 options=[
-                    {"label": "[Team]", "value": "PD-XXX | Name of process / workflow", "disabled": True}
+                    {
+                        "label": "[Team]",
+                        "value": "XX-XXX | Name of process / workflow",
+                        "disabled": True,
+                    }
                 ],
-                value="PD-XXX | Name of process / workflow",
-                labelStyle={"display": "none", "textAlign": "center", "padding": "8px 20px 0px 20px"},
+                value="XX-XXX | Name of process / workflow",
+                labelStyle={
+                    "display": "none",
+                    "textAlign": "center",
+                    "padding": "8px 20px 0px 20px",
+                },
                 id="workflow-id",
                 # className="workflow-css",
             ),
@@ -290,36 +362,61 @@ components_list = [
             html.Div(
                 [
                     html.Button("Sign In", id="sign-on-submit", n_clicks=0),
-                    html.Button("Return", id="log-back-in-submit", className="submit-buttons", n_clicks=0),
-                    html.Button("Log Out", id="log-out-submit", n_clicks=0, style={"paddingRight": "3%"}),
+                    html.Button(
+                        "Return",
+                        id="log-back-in-submit",
+                        className="submit-buttons",
+                        n_clicks=0,
+                    ),
+                    html.Button(
+                        "Log Out",
+                        id="log-out-submit",
+                        n_clicks=0,
+                        style={"paddingRight": "3%"},
+                    ),
                 ],
-                style={"display": "inline-flex"}
+                style={"display": "flow-root"},
             ),
             html.H6(
                 [
                     "Current Version: ",
                     html.Br(),
-                    html.Span(f"{version}", style={"animation": "anim-text-flow-keys 25s infinite linear", "fontSize": "133%"}),
+                    html.Span(
+                        f"{version}",
+                        style={
+                            "animation": "anim-text-flow-keys 25s infinite linear",
+                            "fontSize": "133%",
+                        },
+                    ),
                 ],
                 className="version-tag",
             ),
         ],
         style={"marginLeft": "35%", "width": "30%", "marginBottom": "2px"},
     ),
-    html.Br(),
+    # html.Br(),
     html.Span(className="hr-style-2"),
-    html.Br(),
-    html.Br(),
-    html.Div(id="user-login-confirmation", children=updates, style={"position": "relative", "padding": "2%"}),
+    # html.Br(),
+    html.Div(
+        id="user-login-confirmation",
+        children=updates,
+        style={"position": "relative", "padding": "1%"},
+    ),
     html.Br(),
     html.Div(id="accumulate-output-hidden", style={"display": "none"}),
     html.Hr(id="step-one"),
     html.Hr(style={"width": "50%", "marginLeft": "25%"}),
-    html.H3("Step One (1/2): [Simple instruction/Action command]", style={"textAlign": "center", "marginTop": "-10px"}),
+    html.H3(
+        "Step One (1/2): [Simple instruction/Action command]",
+        style={"textAlign": "center", "marginTop": "-10px"},
+    ),
     html.H6("(subtitle / subdescription)", style={"marginTop": "-20px"}),
     html.H4(html.Div(["[Description of this tool]"])),
     html.Hr(style={"width": "50%", "marginLeft": "25%"}),
-    html.H5(["Some instructions of some kind (e.g., sample ID)"], style={"textAlign": "center"}),
+    html.H5(
+        ["Some instructions of some kind (e.g., sample ID)"],
+        style={"textAlign": "center"},
+    ),
     html.Br(),
     html.Div(
         [
@@ -329,22 +426,39 @@ components_list = [
                         [
                             html.P(
                                 "Type to search.",
-                                style={"textAlign": "left", "color": "#fff", "mixBlendMode": "darken"},
+                                style={
+                                    "textAlign": "left",
+                                    "color": "#fff",
+                                    "mixBlendMode": "darken",
+                                },
                             ),
                             html.H6(
                                 "ℹ | Clear selections before subsequent submissions.",
-                                style={"textAlign": "left", "color": "#fff", "marginTop": "-4px"},
+                                style={
+                                    "textAlign": "left",
+                                    "color": "#fff",
+                                    "marginTop": "-4px",
+                                },
                             ),
                             dcc.Dropdown(
                                 id="dd1-dropdown",
                                 value="None",
                                 clearable=True,
                                 searchable=True,
-                                options=[{"label": "—🔍⤑Select by Benchling Entity Schema Name/ID—", "value": "None"}]
+                                options=[
+                                    {
+                                        "label": "—🔍⤑Select by Schema Name/ID—",
+                                        "value": "None",
+                                    }
+                                ]
                                 + [
-                                    {"label": f" 📃 : —{name}🔑{ent_id}— ", "value": f"{ent_id}-{name}"}
+                                    {
+                                        "label": f" 📃 : —{name}🔑{ent_id}— ",
+                                        "value": f"{ent_id}-{name}",
+                                    }
                                     for (name, ent_id) in sorted(
-                                        zip(entity_schemas.index, entity_schemas.id), key=lambda x: x[0], #reverse=True
+                                        zip(entity_schemas.index, entity_schemas.id),
+                                        key=lambda x: x[0],  # reverse=True
                                     )
                                 ],
                                 style={
@@ -353,7 +467,7 @@ components_list = [
                                     "zIndex": "3005",
                                     "color": "rgb(255, 255, 255)",
                                 },
-                                placeholder="—🔍⤑Search all Benchling Schemas—",
+                                placeholder="—🔍⤑Search all Schemas—",
                             ),
                         ]
                     ),
@@ -380,15 +494,29 @@ components_list = [
                             html.Br(),
                             html.Div(
                                 [
-                                    html.Button("Submit", id="submit-selected-dds", n_clicks=0),
-                                    html.Button("Clear Selections", id="clear-dd-selections", n_clicks=0),
+                                    html.Button(
+                                        "Submit", id="submit-selected-dds", n_clicks=0
+                                    ),
+                                    html.Button(
+                                        "Clear Selections",
+                                        id="clear-dd-selections",
+                                        n_clicks=0,
+                                    ),
                                 ],
-                                style={"textAlign": "center", "marginLeft": "10%", "width": "80%"},
+                                style={
+                                    "textAlign": "center",
+                                    "marginLeft": "10%",
+                                    "width": "80%",
+                                },
                             ),
                         ]
                     ),
                 ],
-                style={"marginLeft": "50%", "transform": "translateX(-50%)", "width": "50%"},
+                style={
+                    "marginLeft": "50%",
+                    "transform": "translateX(-50%)",
+                    "width": "50%",
+                },
             )
         ],
         id="crispr",
@@ -405,9 +533,12 @@ components_list = [
     html.Br(id="step-two"),
     html.Hr(style={"width": "50%", "marginLeft": "25%"}),
     html.H3(
-        "Step Two (2/2): Upload [insert expected file types (e.g., clinical data .xlsx files)].", style={"textAlign": "center", "marginTop": "-10px"}
+        "Step Two (2/2): Upload [insert expected file types (e.g., clinical data .xlsx files)].",
+        style={"textAlign": "center", "marginTop": "-10px"},
     ),
-    html.H2("Click “Initiate Pipeline” to launch analysis.", style={"marginTop": "-0.75%"}),
+    html.H2(
+        "Click “Initiate Pipeline” to launch analysis.", style={"marginTop": "-0.75%"}
+    ),
     html.H6('Uploading from multiple directories? Or after reset? ⮊ Click "✥ Append"'),
     html.Hr(style={"width": "50%", "marginLeft": "25%"}),
     dcc.Upload(
@@ -418,7 +549,9 @@ components_list = [
                 html.Spacer(),
                 "  —or—",
                 html.A(
-                    "📂 Select from your computer", className="hvr-float-shadow", style={"fontWeight": "400", "marginBottom": "5px"}
+                    "📂 Select from your computer",
+                    className="hvr-float-shadow",
+                    style={"fontWeight": "400", "marginBottom": "5px"},
                 ),
                 html.H6(
                     "(Other Info/Note)",
@@ -447,7 +580,11 @@ components_list = [
                 html.Span(
                     html.H5(
                         "(Optional supplementary message...)",
-                        style={"width": "45%", "marginLeft": "27.5%", "fontSize": "80%"},
+                        style={
+                            "width": "45%",
+                            "marginLeft": "27.5%",
+                            "fontSize": "80%",
+                        },
                     )
                 ),
             ],
@@ -466,28 +603,46 @@ components_list = [
         multiple=True,  # (Allow multiple files to be uploaded)
     ),
     html.Br(),
-    html.Button("✥ Append", id="append-uploads", className="refresh-files-button", n_clicks=0),  # (📁+📁...)
-    html.Button("(↻ Refresh Uploads List)", id="refresh-uploads", className="refresh-files-button", n_clicks=0),
-    html.Button("❌Reset Uploads", id="clear-uploads", className="refresh-files-button", n_clicks=0),
+    html.Button(
+        "✥ Append", id="append-uploads", className="refresh-files-button", n_clicks=0
+    ),  # (📁+📁...)
+    html.Button(
+        "(↻ Refresh Uploads List)",
+        id="refresh-uploads",
+        className="refresh-files-button",
+        n_clicks=0,
+    ),
+    html.Button(
+        "❌Reset Uploads",
+        id="clear-uploads",
+        className="refresh-files-button",
+        n_clicks=0,
+    ),
     html.Br(),
     #####################
-    ####  🌠NOTE🌠:  ####
-    ##   QC-PIPELINE   ##
+    ####    NOTE:    ####
+    ##    PIPELINE     ##
     ###  O U T P U T  ###
-    #####⇓(INSERTS)⇓#####
+    #####  INSERTS  #####
+    ######  HERE:  ######
     html.Div(id="received-upload"),
     html.Div(id="saved-reports"),
     html.Div(id="output-data-upload"),
-    ######⬆2HERE⬆#######
     #####################
     html.Div(
         [
             html.Button(
-                "—Initiate Pipeline—", id="initiate-pipeline", n_clicks=0, className="hvr-float-shadow"
+                "—Initiate Pipeline—",
+                id="initiate-pipeline",
+                n_clicks=0,
+                className="hvr-float-shadow",
             ),
             html.Br(),
             html.Br(),
-            html.H6("⮩[Est.]⏱: 💻×⏳ ≈ ≤ X sec / ? [unit∙measure]", style={"textAlign": "center", "color": "unset"}),
+            html.H6(
+                "⮩[Est.] Required Execution Time ≤ ≈ X s (per input sample)",
+                style={"textAlign": "center", "color": "unset"},
+            ),
             html.Br(),
         ],
         style={"textAlign": "center", "position": "relative"},
@@ -495,12 +650,8 @@ components_list = [
     html.H5(
         html.Div(
             [
-                html.Blockquote(
-                    " ⚠ Cautionary notes / hints / advice / warnings - #1"
-                ),
-                html.Blockquote(
-                    " ⚠ Cautionary notes / hints / advice / warnings - #2"
-                ),
+                html.Blockquote(" ⚠ Cautionary notes / hints / advice / warnings - #1"),
+                html.Blockquote(" ⚠ Cautionary notes / hints / advice / warnings - #2"),
             ]
         ),
         style={
@@ -518,7 +669,10 @@ components_list = [
     html.Br(),
     html.Div(
         [
-            html.Span("ℹ| Hint: Check the log! It may be very informative...", className="notes"),
+            html.Span(
+                "ℹ| Hint: Check the log! It may be very informative...",
+                className="notes",
+            ),
             html.Br(),
             html.Span(
                 "(⮩️🚪: Refresh [by selecting] the 'Download Output Files'⤑'Log Files' option below for live updates of all ⌁backend⌁ app execution activity.)",
@@ -529,49 +683,61 @@ components_list = [
         style={"width": "33.3%", "marginLeft": "33.3%"},
     ),
     html.Br(),
-    # html.H6(
-    #     "Reload an Analysis from Previous QC Report(s)",
-    #     style={
-    #         "textAlign": "center",
-    #         "letterSpacing": "2px",
-    #         "fontSize": "75%",
-    #         "fontFamily": "'Cinzel', serif",
-    #         "color": "rgb(60, 52, 140)",
-    #     },
-    # ),
     html.Div(
         [
             dcc.Input(
-                placeholder="–Enter a Previous RUN ID–", type="text", value="", id="save-results-as", disabled=True
+                placeholder="–Enter a Previous RUN ID–",
+                type="text",
+                value="",
+                id="save-results-as",
+                disabled=True,
             ),
             html.Div(
                 [
                     html.Span(
                         html.Button(
-                            "Gather Output from Saved History", id="save-user-results", n_clicks=0, disabled=True
+                            "Gather Output from Saved History",
+                            id="save-user-results",
+                            n_clicks=0,
+                            disabled=True,
                         )
                     ),
-                    html.Span(html.Button("(↻ 📖 Show Preview)", id="refresh-user-history", n_clicks=0, disabled=True)),
+                    html.Span(
+                        html.Button(
+                            "(↻ 📖 Show Preview)",
+                            id="refresh-user-history",
+                            n_clicks=0,
+                            disabled=True,
+                        )
+                    ),
                 ]
             ),
-        ], style={"display": "none"}
+        ],
+        style={"display": "none"},
     ),
-    # html.Hr(),
     html.Hr(id="download-links"),
     html.Br(),
-    # html.Hr(),
     html.Div(dash_table.DataTable(data=[{}]), style={"display": "none"}),
     html.H1("Download Output Files ⬇💻"),
     html.Br(),
     html.Span(className="fader-line-short", style={"marginBottom": "-36px"}),
     html.H4("""Choose from the listed file types to limit downloads (or view all)"""),
     html.P("E.g., Select LOG to view the audit trail of your current session."),
-    html.Div(downloads, style={"width": "60%", "marginLeft": "20%"}, className="dash-custom-btn"),
+    html.Div(
+        downloads,
+        style={"width": "60%", "marginLeft": "20%"},
+        className="dash-custom-btn",
+    ),
     html.Br(),
     html.H3("Output File(s) Download Links", style={"textAlign": "left"}),
     html.Ul(id="output-file-list", style={"textAlign": "left"}),
     html.Ul(id="download-all", style={"textAlign": "left"}),
-    html.Button(["Download All"], id="request-all-zipped", n_clicks=0, style={"fontFamily": "Roboto"}),
+    html.Button(
+        ["Download All"],
+        id="request-all-zipped",
+        n_clicks=0,
+        style={"fontFamily": "Roboto"},
+    ),
     html.Hr(),
     html.Br(),
     html.P(
@@ -587,10 +753,7 @@ components_list = [
             "textAlign": "center",
         },
     ),
-    html.Img(
-        src=f'data:image/png;base64,{base64.b64encode(open(f"{APP_HOME}/assets/images/dash-webapp-template-logo-light-web.png", "rb").read()).decode()}',
-        style={"width": "12.5%", "mixBlendMode": "screen"},
-    ),
+    html.Img(src=app_logo, style={"width": "12.5%", "mixBlendMode": "screen"}),
     html.Br(),
     html.Br(),
     html.Hr(),
@@ -598,6 +761,3 @@ components_list = [
 ]
 
 children = [html.Div(components_list, style={"width": "98%", "marginLeft": "1%"})]
-
-# ~ C O D E  A P P E N D I X ~
-# "(✨", html.Img(src="assets/animations/NEW.gif", style={"width": "35px", "marginBottom": "0px", }, ), "✨❗)"

@@ -40,10 +40,13 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
+from flask import Flask
+from werkzeug.routing import Rule
+
 from .config import *
 
 from .utils import *
-from . import app, cache
+from seqapp import app
 
 import config
 from config import *
@@ -75,8 +78,12 @@ logger = logging.getLogger(__name__)
     object, too; thus, all of the [vast] Flask source code
     functionalities are compatible as-is with Dash apps.
 """
-@app.server.route("/downloadZAll")
-def download_all():
+
+app.server.url_map.add(Rule('/', endpoint='downloadZAll'))
+app.server.url_map.add(Rule('/', endpoint='urlToDownload'))
+
+@app.server.endpoint("/downloadZAll")
+def download_all_selected():
     """Send path from directory to allow user to
     download zipped files as an attachment.
 
@@ -95,7 +102,7 @@ def download_all():
     )
 
 
-@app.server.route("/urlToDownload")
+@app.server.endpoint("/urlToDownload")
 def download_file():
     """Send path from directory to allow user
        to download file as an attachment.
@@ -224,14 +231,13 @@ def confirm_new_session(
                                 className="fader-line-short", style={"marginBottom": "20px"}
                             ),
                             html.P("You're all set!"),
-                            html.H6(f"Sign-on Timestamp:"),
-                            html.H4(f"{log_t_init.split('=')[1]}"),
+                            html.H6(f"Sign-on Timestamp: {log_t_init.split('=')[1]}", style={"fontSize": "0.65rem"}),
                             html.P(
-                                f"Current RUN ID:\t{RUN_ID}",
+                                f"Session ID:\t{RUN_ID}",
                                 style={
-                                    "animation": "anim-text-flow-keys 10s infinite linear",
+                                    "animation": "anim-text-flow-keys 60s infinite linear",
                                     "mixBlendMode": "difference",
-                                    "fontSize": "0.9rem",
+                                    "fontSize": "0.7rem",
                                 },
                             ),
                         ],

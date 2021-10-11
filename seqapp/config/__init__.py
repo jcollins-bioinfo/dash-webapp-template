@@ -25,28 +25,22 @@ import warnings
 import zipfile
 
 from base64 import b64encode
-from collections import ChainMap, Counter, defaultdict
+from collections import ChainMap
+from collections import Counter
+from collections import defaultdict
 from functools import partial
 from multiprocessing import Pool
 from sys import exc_info
 from traceback import format_exception
-
-import dash
-import dash_bio as dashbio
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_table
-from dash.dependencies import Input, Output, State
-from dash.exceptions import PreventUpdate
-
-import flask
-from flask import Flask
 
 import Bio
 import Levenshtein as pylev
 import argon2
 import asyncio
 import bs4 # Beautiful Soup
+import dash
+import dash_bio as dashbio
+import flask
 import ftfy
 import io
 import matplotlib as mpl
@@ -64,26 +58,40 @@ import scipy.stats as stats
 import seaborn as sns
 import sklearn
 
-from Bio import Alphabet, Emboss, SeqIO
+from Bio import Alphabet
+from Bio import Emboss
+from Bio import SeqIO
 from Bio.Alphabet import IUPAC
 from Bio.Data.IUPACData import ambiguous_dna_values
 from Bio.GenBank.Record import Record
 from Bio.Seq import Seq
-from Bio.SeqFeature import FeatureLocation, SeqFeature
+from Bio.SeqFeature import FeatureLocation
+from Bio.SeqFeature import SeqFeature
 from Bio.SeqIO.QualityIO import FastqGeneralIterator
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqUtils import six_frame_translations
 from Bio.SubsMat.MatrixInfo import blosum62
+from dash import dash_table
+from dash import dcc
+from dash import html
+from dash.dependencies import Input
+from dash.dependencies import Output
+from dash.dependencies import State
+from dash.exceptions import PreventUpdate
 from dataclasses import dataclass
-from io import BytesIO, StringIO
+from flask import Flask
+from io import BytesIO
+from io import StringIO
 from matplotlib.collections import LineCollection
 from pathlib import Path
 from six.moves.urllib import request as urlreq
-from typing import Any, List
+from typing import Any
+from typing import List
 from urllib.parse import quote_plus as urlsafe
 from urllib.parse import unquote_plus as unquote
 
 
+# mpl.use('Qt5Agg')
 
 
 ###          I - C E N T R A L  F U N C T I O N S
@@ -163,47 +171,21 @@ url_safe = lambda u: re.sub("[:*\/]", "-", u)
 
 
 
-
-###           I I  -  S T A T I C   G L O B A L   V A R S
+###           I I  -  S T A T I C   G L O B A L   D A T A  
+#                      (CONSTANTS - DO NOT CHANGE)
 
 CURRENT_YEAR = dt.datetime.today().year
 
 #
 # APP  | ESTABLISHMENT OF PROPER RELATIVE PATH POSITIONING
 #
-# APP_HOME = (subprocess.run(
-#     ["pwd"], capture_output=True).stdout.decode("utf-8").strip()
-#              )  # HACK(?) (NOTE: Ends slashlessly.)
 APP_HOME = "/var/www/Apps/dash-webapp-template"
 APP_NAME = "seqapp" # NOTE: Change this!
 TOP_DIR = path.join(*path.split(APP_HOME)[:-1])
 GUNICORN_STDERR = f"{APP_HOME}/{APP_NAME}/app/prod/gunicorn/logs/{today()}"
 RUN_OUTPUT_DIR = f"{APP_HOME}/{APP_NAME}/app/prod/sessions"
 
-#
-#  ---| APP USER ACCOUNTS
-# (NOTE:VARIABLE COMPONENT CONFIG)
-#
-USERS = [{
-    "label": "—Select Your Name—",
-    "value": "None"
-}] + sorted(
-    [
-        # {"label": "__(Add me!)", "value": "ADD_REQUEST"},
-        {
-            "label": "John C",
-            "value": "JOHN_COLLINS"
-        },
-        {
-            "label": "_Guest",
-            "value": "ANON_GUEST"
-        },
-    ],
-    key=lambda d: d["label"],
-)
-USERS_REALNAMES = {u["value"]: u["label"].split()[0] for u in USERS}
-
-
+entity_schemas = pd.read_csv(f"{APP_HOME}/{APP_NAME}/assets/data/entity-schemas.csv", sep='\t')
 #
 #  ----| FILE HEADERS (Useful for, e.g., common DataFrames.)
 #
@@ -226,14 +208,14 @@ a3 = PATH_TO_ANACONDA3_ON_SERVER
 #          including the 20 latest commit messages reported to the
 #          "UPDATES" main app tab component near app title.
 #
-git_dir = TOP_DIR
+# git_dir = TOP_DIR
 
 v = subprocess.run(["git", "describe", "--tags"],
-                   cwd=git_dir,
+                   cwd=APP_HOME,
                    capture_output=True)
 VERSION = v.stdout.decode("utf-8").rstrip()
 
-u = subprocess.run(["git", "log", "-n 50"], cwd=git_dir, capture_output=True)
+u = subprocess.run(["git", "log", "-n 50"], cwd=APP_HOME, capture_output=True)
 UPDATES = u.stdout.decode("utf-8").rstrip().split("\n\ncommit")
 # Remove "commit" from only first item in array for consistency
 UPDATES = [UPDATES[0][7:]] + UPDATES[1:]
@@ -290,3 +272,35 @@ output_filetype_genres = {
     "REF":
     tuple([".fasta", ".gb"]),
 }
+
+
+###       I I I  -  D Y N A M I C   G L O B A L   D A T A
+#             (VARIABLE - YOU MAY NEED TO CHANGE THESE)
+
+#  ---| APP USER ACCOUNTS
+# (NOTE:VARIABLE COMPONENT CONFIG)
+#
+USERS = sorted(
+    [
+        # {"label": "__(Add me!)", "value": "ADD_REQUEST"},
+        {
+            "label": "John C",
+            "value": "JOHN_COLLINS"
+        },
+        {
+            "label": "User A",
+            "value": "USER_A"
+        },
+        {
+            "label": "User B",
+            "value": "USER_B"
+        },
+        {
+            "label": "_Guest",
+            "value": "ANON_GUEST"
+        },
+    ],
+    key=lambda d: d["label"],
+)
+USERS_REALNAMES = {u["value"]: u["label"].split()[0] for u in USERS}
+

@@ -1,0 +1,1582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>dash-webapp-template.seqapp.utils API documentation</title>
+<meta name="description" content="U T I L S
+|
+app.utils
+A general-use, application-agnostic (i.e., templatizable)
+Python utilities module containing custom dataclasses, …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dash-webapp-template.seqapp.utils</code></h1>
+</header>
+<section id="section-intro">
+<h2 id="u-t-i-l-s-apputils">U T I L S
+|
+app.utils</h2>
+<p>A general-use, application-agnostic (i.e., templatizable)
+Python utilities module containing custom dataclasses, functions for
+any/all variety of tasks expected to be very commonly required;
+written non-specifically to any one project in <em>stand-alone</em>
+fashion.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+U T I L S  |  app.utils
+-------------
+A general-use, application-agnostic (i.e., templatizable) 
+   Python utilities module containing custom dataclasses, functions for 
+   any/all variety of tasks expected to be very commonly required; 
+   written non-specifically to any one project in *stand-alone* 
+   fashion.
+
+Attributes
+----------
+logger : logging.Logger
+&#34;&#34;&#34;
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
+from seqapp.config import *
+
+logger = logging.getLogger(__name__)
+
+
+def _verify_login():
+    &#34;&#34;&#34;Argon2-based user authentication cryptography (of sorts).
+
+    Returns
+    -------
+    str
+        secret
+    &#34;&#34;&#34;
+    secret = f&#34;{os.environ.get(&#39;DEFAULT_SECRET&#39;)}&#34;
+    if secret:
+        h = argon2.hash(secret).encode()
+        e = b64encode(f&#34;{h}&#34;).decode(&#34;utf-8&#34;)
+        s = e
+    s = &#34;Please enter your password.&#34;
+    return s
+
+
+def add_logfile(logfile, logger=logger):
+    &#34;&#34;&#34;Ensures creation of logging output file,
+    via file handler addition to passed logger input.
+
+    Parameters
+    ----------
+    logfile : str
+        generated current session output logfile ID
+    logger : logging.Logger
+        current logger
+
+    Returns
+    -------
+    logging.Logger
+        logger with added file handler
+    &#34;&#34;&#34;
+    import coloredlogs
+    coloredlogs.install(level=&#39;INFO&#39;, logger=logger)
+    logger.info(f&#34;Creating logging `FileHandler({logfile})`...&#34;)
+    fh = logging.FileHandler(logfile, mode=&#39;a&#39;)
+    fh.setLevel(logging.INFO)
+    formatter = logging.Formatter(
+        &#34;%(asctime)s %(name)s %(processName)-12s %(module)s➜%(funcName)-40s↴\n%(asctime)s ⎙=%(levelname)s: %(message)s&#34;)
+    fh.setFormatter(formatter)
+    # if len(app.logger.handlers) &lt; 1:
+    #     app.logger.info(&#34;Adding logfile..&#34;)
+    #     app.logger.addHandler(fh)
+    #     app.logger.info(&#34;Added logfile..&#34;)
+    return fh
+
+
+def convert_html_to_dash(el, style=None):
+    &#34;&#34;&#34;[Quite] Conveniently auto-converts whole input HTML
+    into the corresponding Python Dash HTML components. Uses
+    Beautiful Soup to auto-parse into required HTML elements
+    (&#39;el&#39;) if given str input.
+
+    Parameters
+    ----------
+    el : bs.element.NavigableString, str
+        Accepts bs4 HTML &#39;element&#39; object or raw html as string.
+        (Input condition checked and converted by inner function)
+        Beautiful Soup-parsed HTML element, by the tag (e.g., &#34;&lt;p&gt;Hello&lt;/p&gt;&#34;).
+        If not already in bs4-format (just str instead), recursion is employed to simply
+        auto bs4-parse the HTML into a `NavigableString` which can then be passed
+        into the included Dash conversion.
+    style : None, optional
+        Style params for the HTML element.
+
+    Returns
+    -------
+    Dash.html.Div()
+        Where content (i.e. via attr &#39;children&#39;) is a list of Dash `html` components
+        precisely mirroring the elements input as standard-format HTML.
+    &#34;&#34;&#34;
+    ALLOWED_TAGS = {
+        &#34;a&#34;,
+        &#34;address&#34;,
+        &#34;b&#34;,
+        &#34;big&#34;,
+        &#34;blockquote&#34;,
+        &#34;br&#34;,
+        &#34;caption&#34;,
+        &#34;center&#34;,
+        &#34;cite&#34;,
+        &#34;div&#34;,
+        &#34;em&#34;,
+        &#34;font&#34;,
+        &#34;footer&#34;,
+        &#34;header&#34;,
+        &#34;h1&#34;,
+        &#34;h2&#34;,
+        &#34;h3&#34;,
+        &#34;h4&#34;,
+        &#34;h5&#34;,
+        &#34;h6&#34;,
+        &#34;hr&#34;,
+        &#34;i&#34;,
+        &#34;img&#34;,
+        &#34;li&#34;,
+        &#34;ol&#34;,
+        &#34;option&#34;,
+        &#34;p&#34;,
+        &#34;pre&#34;,
+        &#34;s&#34;,
+        &#34;small&#34;,
+        &#34;span&#34;,
+        &#34;strong&#34;,
+        &#34;table&#34;,
+        &#34;td&#34;,
+        &#34;textarea&#34;,
+        &#34;th&#34;,
+        &#34;tr&#34;,
+        &#34;tt&#34;,
+        &#34;u&#34;,
+        &#34;ul&#34;,
+    }
+
+    def _extract_style(el):
+        &#34;&#34;&#34;Convert HTML-formatted style code into a
+        format that can be passed to a Dash html object
+        during instantiation, which underlies the
+        conversion procedure herein.
+
+        Parameters
+        ----------
+        el : bs.element.NavigableString
+
+        Returns
+        -------
+        dict
+            Dash-compatible style params
+        &#34;&#34;&#34;
+        if not el.attrs.get(&#34;style&#34;):
+            return None
+        return {
+            k.strip(): v.strip()
+            for k, v in [
+                x.split(&#34;: &#34;) for x in el.attrs[&#34;style&#34;].split(&#34;;&#34;)
+                if len(x) &gt; 0
+            ]
+        }
+
+    if type(el) is str:
+        return convert_html_to_dash(bs.BeautifulSoup(el, &#34;html.parser&#34;))
+
+    if type(el) == bs.element.NavigableString:
+        return str(el)
+    else:
+        name = el.name
+        style = _extract_style(el) if style is None else style
+        contents = [convert_html_to_dash(x) for x in el.contents]
+        if name.title().lower() not in ALLOWED_TAGS:
+            return contents[0] if len(contents) == 1 else html.Div(contents)
+
+    return getattr(html, name.title())(contents, style=style)
+
+
+
+def convert_numerics(s):
+    &#34;&#34;&#34;Attempt to convert as many DataFrame columns
+    into having numeric numpy/pandas dtypes as possible
+    (e.g., `float64`, etc.).
+
+    Parameters
+    ----------
+    s : pd.Series
+        E.g., as supplied by an iterable/generator,
+        say, via the Pandas apply method on the rows
+        of a DataFrame:
+        &gt;&gt;&gt; pd.DataFrame.loc[:,col1].apply()
+
+    Returns
+    -------
+    pd.Series
+        dtype-transformed (possibly) input DataFrame
+        sample [row] (or variate [col], i.e., if
+        axis=1 for pd df operations)
+    &#34;&#34;&#34;
+    try:
+        s = pd.to_numeric(s.dropna().apply(float))
+    except Exception as e:
+        pass
+    return s
+
+
+def file_download_link(filename, get_all_zipped=False):
+    &#34;&#34;&#34;Generate properly formated (i.e. &#39;safe&#39;, etc.) URL allowing
+    USER download of nearly any of the per-RUN generated output files.
+
+    Parameters
+    ----------
+    filename : str
+        Full path of file intended to be listed
+        as a downloadable link.
+    get_all_zipped : bool, optional
+
+    Returns
+    -------
+    Dash.html.A()
+        Url-safe-converted downloadable link.
+    &#34;&#34;&#34;
+    if get_all_zipped:
+        return html.A(
+            re.sub(f&#34;{RUN_OUTPUT_DIR}/&#34;, &#34;&#34;, filename),
+            href=&#34;/downloadZAll?value={}&#34;.format(urlsafe(filename)),
+        )
+    else:
+        return html.A(
+            re.sub(f&#34;{RUN_OUTPUT_DIR}/&#34;, &#34;&#34;, filename),
+            href=&#34;/urlToDownload?value={}&#34;.format(urlsafe(filename)),
+        )
+
+
+def filesafe_ctime():
+    &#34;&#34;&#34;Returns a filename-safe (including accounting for
+    accurate sorting behavior!) current timestamp.
+
+    Returns
+    -------
+    str
+        A current timestamp
+
+    Examples
+    --------
+    &gt;&gt;&gt; filesafe_ctime()
+     &#39;20191027_18101572230466&#39;
+    &#34;&#34;&#34;
+    return time.strftime(&#34;%Y%m%d_%H%m%s&#34;, time.gmtime())
+
+
+def find_unique_ID(list_of_input_smpls):
+    &#34;&#34;&#34;Attempt to determine a unique ID shared among all input
+    sample names/IDs, via a largest substring function performed
+    combinatorially exhaustively pairwise among the input list.
+
+    Parameters
+    ----------
+    list_of_input_smpls : list
+
+    Returns
+    -------
+    list
+        Unique set of all possible found shared uid&#39;s
+    &#34;&#34;&#34;
+    if len(list_of_input_smpls) == 1:
+        uid = list_of_input_smpls
+    uid = list(
+        set([
+            largest_substr(a, b)
+            for (a, b) in [*itl.combinations(list_of_input_smpls, 2)]
+        ]))
+    return uid
+
+
+def now():
+    &#34;&#34;&#34;Microsecond-level timestamps.
+
+    Returns
+    -------
+    str
+        Underscore-delimited date, today, plus the current time
+        as well down to sub-millisecond precision.
+    &#34;&#34;&#34;
+    return re.sub(&#34;[ :.\-]&#34;, &#34;&#34;, str(dt.datetime.now()))
+
+
+def get_output_files(selected_filetypes,
+                     final_output_dir=None):
+    &#34;&#34;&#34;List all files in the current RUN&#39;s output directory,
+    as thus available for USER download.
+
+    Parameters
+    ----------
+    selected_filetypes : []
+        List of filename extensions representing the selected
+        subset genre of output files (e.g., [&#39;.bam&#39;, &#39;.sam&#39;]
+        for &#34;Mapping&#34; files).
+    final_output_dir : None, optional str
+        If given, should be the current user session `RUN_ID`
+        full path; otherwise, if default &lt;class &#39;NoneType&#39;&gt;,
+        then looks up all files in the globally accumulated
+        &#34;Plasmids Archive&#34;.
+
+    Returns
+    -------
+    list
+        List of full filepaths for files to download.
+    &#34;&#34;&#34;
+    files_to_dl = []
+    if final_output_dir:
+        dl_dir = final_output_dir
+    else:
+        dl_dir = PLASMIDS_ARCHIVE
+    for topdir, currdir, files in os.walk(dl_dir):
+        for filename in files:
+            path = os.path.join(topdir, filename)
+            if os.path.isfile(path):
+                full_fn, ext = os.path.splitext(path)
+                if ext in selected_filetypes:
+                    files_to_dl.append(path)
+    return files_to_dl
+
+
+def initiate_logging(app=__name__, log_filename=None):
+    &#34;&#34;&#34;Add a &#39;FileHandler&#39; to an input Logger() object.
+
+    Parameters
+    ----------
+    app : str, optional
+        Str name of current `app`; defaults to `__name__`
+    log_filename : str, optional
+        Provide to override default logfile name, which
+        is the `__name__` of app (dash.Dash() or flask.Flask())
+        dot timestamp dot log.
+
+    Returns
+    -------
+    logging.Logger()
+        Modified input with added FileHandler
+    &#34;&#34;&#34;
+    if not log_filename:
+        log_filename = f&#34;{app}.{filesafe_ctime()}.log&#34;
+    logger = logging.getLogger(app)
+    logger.setLevel(logging.INFO)
+    fh = logging.FileHandler(log_filename)
+    fh.setLevel(logging.INFO)
+    logger.addHandler(fh)
+    return logger
+
+
+def largest_substr(s1, s2):
+    &#34;&#34;&#34;Determine and return the longest occurence of any
+    possible substring of input string s2 located anywhere
+    in input string s1.
+
+    Parameters
+    ----------
+    s1 : str
+        reference sequence to query
+    s2 : str
+        target sequence to find (in query)
+
+    Returns
+    -------
+    str
+        the largest found substring of s2 in s1
+
+    Examples
+    --------
+    &gt;&gt;&gt; largest_substr(&#34;GATTACA&#34;, &#34;ATTACK&#34;)
+    &#39;ATTAC&#39;
+    &#34;&#34;&#34;
+    len1, len2 = len(s1), len(s2)
+    ir, jr = 0, 0
+    for i1 in range(len1):
+        i2 = s2.find(s1[i1])
+        while i2 &gt;= 0:
+            j1, j2 = i1 + 1, i2 + 1
+            while j1 &lt; len1 and j2 &lt; len2 and s2[j2] == s1[j1]:
+                if j1 - i1 &gt; jr - ir:
+                    ir, jr = i1, j1
+                j1 += 1
+                j2 += 1
+            i2 = s2.find(s1[i1], i2 + 1)
+    return s1[ir:jr + 1]
+
+
+def ljoin(list_of_lists):
+    &#34;&#34;&#34;Flatten any n-multidimensional array of data &amp; return
+    a single list copy of it in only one dimension total.
+    (Or in other words, take any aribtrarily nested list of
+    lists [of lists, [...], etc.] and return a combined,
+    single list.)
+    
+    Parameters
+    ----------
+    list_of_lists : list
+        Multidimensional array. E.g.:
+    &gt;&gt;&gt; [[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], [1, 2 3]]
+    
+    Returns
+    -------
+    list
+        1-D array; e.g.:
+    &gt;&gt;&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2 3]
+    &#34;&#34;&#34;
+    return [*itl.chain.from_iterable(list_of_lists)]
+
+
+def make_randuid(salt=&#34;&#34;, n=8):
+    &#34;&#34;&#34;Generate an n-character ID drawn randomly from the 22-
+    member string.hexdigits character set:
+    &gt;
+    &gt;    &#39;0123456789abcdefABCDEF&#39;
+    &gt;
+    &gt; Probability of uniqueness (for default length n=8 uid):
+    &gt;
+    &gt;    (1/22**8) = 1.822294453944271e-11
+
+    Parameters
+    ----------
+    salt : str, optional
+        Add salt to front of uid to
+        mitigate non-uniqueness risk.
+    n : int, optional
+        Number of characters to randomly
+        draw to create the uid.
+
+    Returns
+    -------
+    str
+        randomly generated hexdigits uid
+
+    Examples
+    --------
+    &gt;&gt;&gt; [make_randuid() for _ in range(3)]
+    [&#39;7eB5740b&#39;, &#39;B0B3e51a&#39;, &#39;C5E3941E&#39;]
+    &#34;&#34;&#34;
+    return f&#34;{salt}{&#39;&#39;.join(random.choices(string.hexdigits, k=n))}&#34;
+
+
+def parallelized_dfapply_concat(
+        file_list,
+        jobs=((mp.cpu_count() * 2) + 1),
+        drop_blank_cols=True,
+        tab_delimited_input=True,
+        max_cols=1000,
+):
+    &#34;&#34;&#34;Parallelized dataframe concatenation via concomitant
+    reading in of multiple files.
+
+    Parameters
+    ----------
+    file_list : list
+        List of &lt;str&gt; file paths.
+    jobs : int, optional
+        Number of workers in multiprocessing pool to spawn.
+    drop_blank_cols : bool, optional
+        Do not return entirely null column variates.
+    tab_delimited_input : bool, optional
+        Assumes tab separated data unless explicitly specified
+        otherwise.
+    max_cols : int, optional
+        Cutoff to stop reading (horizontally) tabular input data
+
+    Returns
+    -------
+    pd.DataFrame
+        Single aggregated df
+
+    &#34;&#34;&#34;
+
+    def df_reader(filename, max_cols=max_cols):
+        &#34;&#34;&#34;Read input data from an Excel (.xlsx) file,
+        comma-separated raw text file; or else assumes
+        tab-delimited raw text input.
+
+        Parameters
+        ----------
+        filename : str
+            Full path to file
+        max_cols : int, optional
+            Defaults to 1000
+
+        Returns
+        -------
+        pd.DataFrame
+        &#34;&#34;&#34;
+        if filename.endswith(&#34;.xlsx&#34;):
+            return pd.read_excel(filename, usecols=max_cols)
+        elif filename.endswith(&#34;.csv&#34;) and not tab_delimited_input:
+            return pd.read_csv(filename, usecols=max_cols)
+        else:
+            return pd.read_csv(filename, sep=&#34;\t&#34;, usecols=max_cols)
+
+    with mp.Pool(jobs) as p:
+        dfs = p.map(df_reader, file_list)
+        df = pd.concat(dfs)
+
+    if drop_blank_columns:
+        df = df.dropna(axis=1, how=&#34;all&#34;)
+
+    return df
+
+
+def ntw(n):
+    &#34;&#34;&#34;Numbers to Words (ntw)
+    -------------------------
+    Convert integers less than 100 from numeric
+    type to spelled-out words, as strings.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; ntw(44)
+    &gt;&gt;&gt; &#34;XLIV&#34;
+    
+    Parameters
+    ----------
+    n : int
+        1 &lt;= int(x) &lt;= 99
+    
+    Returns
+    -------
+    str
+        Roman Numeral equivalent
+    &#34;&#34;&#34;
+    numbers_to_words = {
+        1: &#34;I&#34;,
+        2: &#34;II&#34;,
+        3: &#34;III&#34;,
+        4: &#34;IV&#34;,
+        5: &#34;V&#34;,
+        6: &#34;VI&#34;,
+        7: &#34;VII&#34;,
+        8: &#34;VIII&#34;,
+        9: &#34;IX&#34;,
+        10: &#34;X&#34;,
+        20: &#34;XX&#34;,
+        30: &#34;XXX&#34;,
+        40: &#34;XL&#34;,
+        50: &#34;L&#34;,
+        60: &#34;LX&#34;,
+        70: &#34;LXX&#34;,
+        80: &#34;LXXX&#34;,
+        90: &#34;XC&#34;,
+        100: &#34;C&#34;,
+        0: &#34;&#34;,
+    }
+    try:
+        return numbers_to_words[n]
+    except KeyError:
+        try:
+            return numbers_to_words[n - n % 10] + numbers_to_words[n % 10]
+        except KeyError:
+            return &#34;[error:Number out of range]&#34;
+
+
+def today():
+    &#34;&#34;&#34;Current date in YYYYMMDD format.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; today()
+    &#39;20180924&#39;
+    
+    Returns
+    -------
+    str
+        pure alphanumeric date - today
+    
+    &#34;&#34;&#34;
+    return now()[:8]
+
+  </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dash-webapp-template.seqapp.utils.add_logfile"><code class="name flex">
+<span>def <span class="ident">add_logfile</span></span>(<span>logfile, logger=&lt;Logger dash-webapp-template.seqapp.utils (INFO)&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ensures creation of logging output file,
+via file handler addition to passed logger input.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>logfile</code></strong> :&ensp;<code>str</code></dt>
+<dd>generated current session output logfile ID</dd>
+<dt><strong><code>logger</code></strong> :&ensp;<code>logging.Logger</code></dt>
+<dd>current logger</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>logging.Logger</code></dt>
+<dd>logger with added file handler</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_logfile(logfile, logger=logger):
+    &#34;&#34;&#34;Ensures creation of logging output file,
+    via file handler addition to passed logger input.
+
+    Parameters
+    ----------
+    logfile : str
+        generated current session output logfile ID
+    logger : logging.Logger
+        current logger
+
+    Returns
+    -------
+    logging.Logger
+        logger with added file handler
+    &#34;&#34;&#34;
+    import coloredlogs
+    coloredlogs.install(level=&#39;INFO&#39;, logger=logger)
+    logger.info(f&#34;Creating logging `FileHandler({logfile})`...&#34;)
+    fh = logging.FileHandler(logfile, mode=&#39;a&#39;)
+    fh.setLevel(logging.INFO)
+    formatter = logging.Formatter(
+        &#34;%(asctime)s %(name)s %(processName)-12s %(module)s➜%(funcName)-40s↴\n%(asctime)s ⎙=%(levelname)s: %(message)s&#34;)
+    fh.setFormatter(formatter)
+    # if len(app.logger.handlers) &lt; 1:
+    #     app.logger.info(&#34;Adding logfile..&#34;)
+    #     app.logger.addHandler(fh)
+    #     app.logger.info(&#34;Added logfile..&#34;)
+    return fh</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.convert_html_to_dash"><code class="name flex">
+<span>def <span class="ident">convert_html_to_dash</span></span>(<span>el, style=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>[Quite] Conveniently auto-converts whole input HTML
+into the corresponding Python Dash HTML components. Uses
+Beautiful Soup to auto-parse into required HTML elements
+('el') if given str input.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>el</code></strong> :&ensp;<code>bs.element.NavigableString, str</code></dt>
+<dd>Accepts bs4 HTML 'element' object or raw html as string.
+(Input condition checked and converted by inner function)
+Beautiful Soup-parsed HTML element, by the tag (e.g., "<p>Hello</p>").
+If not already in bs4-format (just str instead), recursion is employed to simply
+auto bs4-parse the HTML into a <code>NavigableString</code> which can then be passed
+into the included Dash conversion.</dd>
+<dt><strong><code>style</code></strong> :&ensp;<code>None</code>, optional</dt>
+<dd>Style params for the HTML element.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Dash.html.Div()</code></dt>
+<dd>Where content (i.e. via attr 'children') is a list of Dash <code>html</code> components
+precisely mirroring the elements input as standard-format HTML.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_html_to_dash(el, style=None):
+    &#34;&#34;&#34;[Quite] Conveniently auto-converts whole input HTML
+    into the corresponding Python Dash HTML components. Uses
+    Beautiful Soup to auto-parse into required HTML elements
+    (&#39;el&#39;) if given str input.
+
+    Parameters
+    ----------
+    el : bs.element.NavigableString, str
+        Accepts bs4 HTML &#39;element&#39; object or raw html as string.
+        (Input condition checked and converted by inner function)
+        Beautiful Soup-parsed HTML element, by the tag (e.g., &#34;&lt;p&gt;Hello&lt;/p&gt;&#34;).
+        If not already in bs4-format (just str instead), recursion is employed to simply
+        auto bs4-parse the HTML into a `NavigableString` which can then be passed
+        into the included Dash conversion.
+    style : None, optional
+        Style params for the HTML element.
+
+    Returns
+    -------
+    Dash.html.Div()
+        Where content (i.e. via attr &#39;children&#39;) is a list of Dash `html` components
+        precisely mirroring the elements input as standard-format HTML.
+    &#34;&#34;&#34;
+    ALLOWED_TAGS = {
+        &#34;a&#34;,
+        &#34;address&#34;,
+        &#34;b&#34;,
+        &#34;big&#34;,
+        &#34;blockquote&#34;,
+        &#34;br&#34;,
+        &#34;caption&#34;,
+        &#34;center&#34;,
+        &#34;cite&#34;,
+        &#34;div&#34;,
+        &#34;em&#34;,
+        &#34;font&#34;,
+        &#34;footer&#34;,
+        &#34;header&#34;,
+        &#34;h1&#34;,
+        &#34;h2&#34;,
+        &#34;h3&#34;,
+        &#34;h4&#34;,
+        &#34;h5&#34;,
+        &#34;h6&#34;,
+        &#34;hr&#34;,
+        &#34;i&#34;,
+        &#34;img&#34;,
+        &#34;li&#34;,
+        &#34;ol&#34;,
+        &#34;option&#34;,
+        &#34;p&#34;,
+        &#34;pre&#34;,
+        &#34;s&#34;,
+        &#34;small&#34;,
+        &#34;span&#34;,
+        &#34;strong&#34;,
+        &#34;table&#34;,
+        &#34;td&#34;,
+        &#34;textarea&#34;,
+        &#34;th&#34;,
+        &#34;tr&#34;,
+        &#34;tt&#34;,
+        &#34;u&#34;,
+        &#34;ul&#34;,
+    }
+
+    def _extract_style(el):
+        &#34;&#34;&#34;Convert HTML-formatted style code into a
+        format that can be passed to a Dash html object
+        during instantiation, which underlies the
+        conversion procedure herein.
+
+        Parameters
+        ----------
+        el : bs.element.NavigableString
+
+        Returns
+        -------
+        dict
+            Dash-compatible style params
+        &#34;&#34;&#34;
+        if not el.attrs.get(&#34;style&#34;):
+            return None
+        return {
+            k.strip(): v.strip()
+            for k, v in [
+                x.split(&#34;: &#34;) for x in el.attrs[&#34;style&#34;].split(&#34;;&#34;)
+                if len(x) &gt; 0
+            ]
+        }
+
+    if type(el) is str:
+        return convert_html_to_dash(bs.BeautifulSoup(el, &#34;html.parser&#34;))
+
+    if type(el) == bs.element.NavigableString:
+        return str(el)
+    else:
+        name = el.name
+        style = _extract_style(el) if style is None else style
+        contents = [convert_html_to_dash(x) for x in el.contents]
+        if name.title().lower() not in ALLOWED_TAGS:
+            return contents[0] if len(contents) == 1 else html.Div(contents)
+
+    return getattr(html, name.title())(contents, style=style)</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.convert_numerics"><code class="name flex">
+<span>def <span class="ident">convert_numerics</span></span>(<span>s)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Attempt to convert as many DataFrame columns
+into having numeric numpy/pandas dtypes as possible
+(e.g., <code>float64</code>, etc.).</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>s</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>E.g., as supplied by an iterable/generator,
+say, via the Pandas apply method on the rows
+of a DataFrame:<blockquote>
+<blockquote>
+<blockquote>
+<p>pd.DataFrame.loc[:,col1].apply()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.Series</code></dt>
+<dd>dtype-transformed (possibly) input DataFrame
+sample [row] (or variate [col], i.e., if
+axis=1 for pd df operations)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_numerics(s):
+    &#34;&#34;&#34;Attempt to convert as many DataFrame columns
+    into having numeric numpy/pandas dtypes as possible
+    (e.g., `float64`, etc.).
+
+    Parameters
+    ----------
+    s : pd.Series
+        E.g., as supplied by an iterable/generator,
+        say, via the Pandas apply method on the rows
+        of a DataFrame:
+        &gt;&gt;&gt; pd.DataFrame.loc[:,col1].apply()
+
+    Returns
+    -------
+    pd.Series
+        dtype-transformed (possibly) input DataFrame
+        sample [row] (or variate [col], i.e., if
+        axis=1 for pd df operations)
+    &#34;&#34;&#34;
+    try:
+        s = pd.to_numeric(s.dropna().apply(float))
+    except Exception as e:
+        pass
+    return s</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.file_download_link"><code class="name flex">
+<span>def <span class="ident">file_download_link</span></span>(<span>filename, get_all_zipped=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate properly formated (i.e. 'safe', etc.) URL allowing
+USER download of nearly any of the per-RUN generated output files.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>filename</code></strong> :&ensp;<code>str</code></dt>
+<dd>Full path of file intended to be listed
+as a downloadable link.</dd>
+<dt><strong><code>get_all_zipped</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Dash.html.A()</code></dt>
+<dd>Url-safe-converted downloadable link.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def file_download_link(filename, get_all_zipped=False):
+    &#34;&#34;&#34;Generate properly formated (i.e. &#39;safe&#39;, etc.) URL allowing
+    USER download of nearly any of the per-RUN generated output files.
+
+    Parameters
+    ----------
+    filename : str
+        Full path of file intended to be listed
+        as a downloadable link.
+    get_all_zipped : bool, optional
+
+    Returns
+    -------
+    Dash.html.A()
+        Url-safe-converted downloadable link.
+    &#34;&#34;&#34;
+    if get_all_zipped:
+        return html.A(
+            re.sub(f&#34;{RUN_OUTPUT_DIR}/&#34;, &#34;&#34;, filename),
+            href=&#34;/downloadZAll?value={}&#34;.format(urlsafe(filename)),
+        )
+    else:
+        return html.A(
+            re.sub(f&#34;{RUN_OUTPUT_DIR}/&#34;, &#34;&#34;, filename),
+            href=&#34;/urlToDownload?value={}&#34;.format(urlsafe(filename)),
+        )</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.filesafe_ctime"><code class="name flex">
+<span>def <span class="ident">filesafe_ctime</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a filename-safe (including accounting for
+accurate sorting behavior!) current timestamp.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>A current timestamp</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; filesafe_ctime()
+ '20191027_18101572230466'
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def filesafe_ctime():
+    &#34;&#34;&#34;Returns a filename-safe (including accounting for
+    accurate sorting behavior!) current timestamp.
+
+    Returns
+    -------
+    str
+        A current timestamp
+
+    Examples
+    --------
+    &gt;&gt;&gt; filesafe_ctime()
+     &#39;20191027_18101572230466&#39;
+    &#34;&#34;&#34;
+    return time.strftime(&#34;%Y%m%d_%H%m%s&#34;, time.gmtime())</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.find_unique_ID"><code class="name flex">
+<span>def <span class="ident">find_unique_ID</span></span>(<span>list_of_input_smpls)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Attempt to determine a unique ID shared among all input
+sample names/IDs, via a largest substring function performed
+combinatorially exhaustively pairwise among the input list.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>list_of_input_smpls</code></strong> :&ensp;<code>list</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Unique set of all possible found shared uid's</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_unique_ID(list_of_input_smpls):
+    &#34;&#34;&#34;Attempt to determine a unique ID shared among all input
+    sample names/IDs, via a largest substring function performed
+    combinatorially exhaustively pairwise among the input list.
+
+    Parameters
+    ----------
+    list_of_input_smpls : list
+
+    Returns
+    -------
+    list
+        Unique set of all possible found shared uid&#39;s
+    &#34;&#34;&#34;
+    if len(list_of_input_smpls) == 1:
+        uid = list_of_input_smpls
+    uid = list(
+        set([
+            largest_substr(a, b)
+            for (a, b) in [*itl.combinations(list_of_input_smpls, 2)]
+        ]))
+    return uid</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.get_output_files"><code class="name flex">
+<span>def <span class="ident">get_output_files</span></span>(<span>selected_filetypes, final_output_dir=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List all files in the current RUN's output directory,
+as thus available for USER download.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>selected_filetypes</code></strong> :&ensp;<code>[]</code></dt>
+<dd>List of filename extensions representing the selected
+subset genre of output files (e.g., ['.bam', '.sam']
+for "Mapping" files).</dd>
+<dt><strong><code>final_output_dir</code></strong> :&ensp;<code>None</code>, optional <code>str</code></dt>
+<dd>If given, should be the current user session <code>RUN_ID</code>
+full path; otherwise, if default <class 'NoneType'>,
+then looks up all files in the globally accumulated
+"Plasmids Archive".</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>List of full filepaths for files to download.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_output_files(selected_filetypes,
+                     final_output_dir=None):
+    &#34;&#34;&#34;List all files in the current RUN&#39;s output directory,
+    as thus available for USER download.
+
+    Parameters
+    ----------
+    selected_filetypes : []
+        List of filename extensions representing the selected
+        subset genre of output files (e.g., [&#39;.bam&#39;, &#39;.sam&#39;]
+        for &#34;Mapping&#34; files).
+    final_output_dir : None, optional str
+        If given, should be the current user session `RUN_ID`
+        full path; otherwise, if default &lt;class &#39;NoneType&#39;&gt;,
+        then looks up all files in the globally accumulated
+        &#34;Plasmids Archive&#34;.
+
+    Returns
+    -------
+    list
+        List of full filepaths for files to download.
+    &#34;&#34;&#34;
+    files_to_dl = []
+    if final_output_dir:
+        dl_dir = final_output_dir
+    else:
+        dl_dir = PLASMIDS_ARCHIVE
+    for topdir, currdir, files in os.walk(dl_dir):
+        for filename in files:
+            path = os.path.join(topdir, filename)
+            if os.path.isfile(path):
+                full_fn, ext = os.path.splitext(path)
+                if ext in selected_filetypes:
+                    files_to_dl.append(path)
+    return files_to_dl</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.initiate_logging"><code class="name flex">
+<span>def <span class="ident">initiate_logging</span></span>(<span>app='dash-webapp-template.seqapp.utils', log_filename=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add a 'FileHandler' to an input Logger() object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>app</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Str name of current <code>app</code>; defaults to <code>__name__</code></dd>
+<dt><strong><code>log_filename</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Provide to override default logfile name, which
+is the <code>__name__</code> of app (dash.Dash() or flask.Flask())
+dot timestamp dot log.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>logging.Logger()</code></dt>
+<dd>Modified input with added FileHandler</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initiate_logging(app=__name__, log_filename=None):
+    &#34;&#34;&#34;Add a &#39;FileHandler&#39; to an input Logger() object.
+
+    Parameters
+    ----------
+    app : str, optional
+        Str name of current `app`; defaults to `__name__`
+    log_filename : str, optional
+        Provide to override default logfile name, which
+        is the `__name__` of app (dash.Dash() or flask.Flask())
+        dot timestamp dot log.
+
+    Returns
+    -------
+    logging.Logger()
+        Modified input with added FileHandler
+    &#34;&#34;&#34;
+    if not log_filename:
+        log_filename = f&#34;{app}.{filesafe_ctime()}.log&#34;
+    logger = logging.getLogger(app)
+    logger.setLevel(logging.INFO)
+    fh = logging.FileHandler(log_filename)
+    fh.setLevel(logging.INFO)
+    logger.addHandler(fh)
+    return logger</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.largest_substr"><code class="name flex">
+<span>def <span class="ident">largest_substr</span></span>(<span>s1, s2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine and return the longest occurence of any
+possible substring of input string s2 located anywhere
+in input string s1.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>s1</code></strong> :&ensp;<code>str</code></dt>
+<dd>reference sequence to query</dd>
+<dt><strong><code>s2</code></strong> :&ensp;<code>str</code></dt>
+<dd>target sequence to find (in query)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>the largest found substring of s2 in s1</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; largest_substr(&quot;GATTACA&quot;, &quot;ATTACK&quot;)
+'ATTAC'
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def largest_substr(s1, s2):
+    &#34;&#34;&#34;Determine and return the longest occurence of any
+    possible substring of input string s2 located anywhere
+    in input string s1.
+
+    Parameters
+    ----------
+    s1 : str
+        reference sequence to query
+    s2 : str
+        target sequence to find (in query)
+
+    Returns
+    -------
+    str
+        the largest found substring of s2 in s1
+
+    Examples
+    --------
+    &gt;&gt;&gt; largest_substr(&#34;GATTACA&#34;, &#34;ATTACK&#34;)
+    &#39;ATTAC&#39;
+    &#34;&#34;&#34;
+    len1, len2 = len(s1), len(s2)
+    ir, jr = 0, 0
+    for i1 in range(len1):
+        i2 = s2.find(s1[i1])
+        while i2 &gt;= 0:
+            j1, j2 = i1 + 1, i2 + 1
+            while j1 &lt; len1 and j2 &lt; len2 and s2[j2] == s1[j1]:
+                if j1 - i1 &gt; jr - ir:
+                    ir, jr = i1, j1
+                j1 += 1
+                j2 += 1
+            i2 = s2.find(s1[i1], i2 + 1)
+    return s1[ir:jr + 1]</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.ljoin"><code class="name flex">
+<span>def <span class="ident">ljoin</span></span>(<span>list_of_lists)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Flatten any n-multidimensional array of data &amp; return
+a single list copy of it in only one dimension total.
+(Or in other words, take any aribtrarily nested list of
+lists [of lists, [&hellip;], etc.] and return a combined,
+single list.)</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>list_of_lists</code></strong> :&ensp;<code>list</code></dt>
+<dd>Multidimensional array. E.g.:</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; [['a', 'b', 'c'], [1, 2 3]]
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>1-D array; e.g.:</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; ['a', 'b', 'c', 1, 2 3]
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ljoin(list_of_lists):
+    &#34;&#34;&#34;Flatten any n-multidimensional array of data &amp; return
+    a single list copy of it in only one dimension total.
+    (Or in other words, take any aribtrarily nested list of
+    lists [of lists, [...], etc.] and return a combined,
+    single list.)
+    
+    Parameters
+    ----------
+    list_of_lists : list
+        Multidimensional array. E.g.:
+    &gt;&gt;&gt; [[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], [1, 2 3]]
+    
+    Returns
+    -------
+    list
+        1-D array; e.g.:
+    &gt;&gt;&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2 3]
+    &#34;&#34;&#34;
+    return [*itl.chain.from_iterable(list_of_lists)]</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.make_randuid"><code class="name flex">
+<span>def <span class="ident">make_randuid</span></span>(<span>salt='', n=8)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate an n-character ID drawn randomly from the 22-
+member string.hexdigits character set:</p>
+<blockquote>
+<p>'0123456789abcdefABCDEF'</p>
+<p>Probability of uniqueness (for default length n=8 uid):</p>
+<p>(1/22**8) = 1.822294453944271e-11</p>
+</blockquote>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>salt</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Add salt to front of uid to
+mitigate non-uniqueness risk.</dd>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of characters to randomly
+draw to create the uid.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>randomly generated hexdigits uid</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; [make_randuid() for _ in range(3)]
+['7eB5740b', 'B0B3e51a', 'C5E3941E']
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_randuid(salt=&#34;&#34;, n=8):
+    &#34;&#34;&#34;Generate an n-character ID drawn randomly from the 22-
+    member string.hexdigits character set:
+    &gt;
+    &gt;    &#39;0123456789abcdefABCDEF&#39;
+    &gt;
+    &gt; Probability of uniqueness (for default length n=8 uid):
+    &gt;
+    &gt;    (1/22**8) = 1.822294453944271e-11
+
+    Parameters
+    ----------
+    salt : str, optional
+        Add salt to front of uid to
+        mitigate non-uniqueness risk.
+    n : int, optional
+        Number of characters to randomly
+        draw to create the uid.
+
+    Returns
+    -------
+    str
+        randomly generated hexdigits uid
+
+    Examples
+    --------
+    &gt;&gt;&gt; [make_randuid() for _ in range(3)]
+    [&#39;7eB5740b&#39;, &#39;B0B3e51a&#39;, &#39;C5E3941E&#39;]
+    &#34;&#34;&#34;
+    return f&#34;{salt}{&#39;&#39;.join(random.choices(string.hexdigits, k=n))}&#34;</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.now"><code class="name flex">
+<span>def <span class="ident">now</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Microsecond-level timestamps.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Underscore-delimited date, today, plus the current time
+as well down to sub-millisecond precision.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def now():
+    &#34;&#34;&#34;Microsecond-level timestamps.
+
+    Returns
+    -------
+    str
+        Underscore-delimited date, today, plus the current time
+        as well down to sub-millisecond precision.
+    &#34;&#34;&#34;
+    return re.sub(&#34;[ :.\-]&#34;, &#34;&#34;, str(dt.datetime.now()))</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.ntw"><code class="name flex">
+<span>def <span class="ident">ntw</span></span>(<span>n)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="numbers-to-words-ntw">Numbers to Words (ntw)</h2>
+<p>Convert integers less than 100 from numeric
+type to spelled-out words, as strings.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; ntw(44)
+&gt;&gt;&gt; &quot;XLIV&quot;
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>1 &lt;= int(x) &lt;= 99</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Roman Numeral equivalent</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ntw(n):
+    &#34;&#34;&#34;Numbers to Words (ntw)
+    -------------------------
+    Convert integers less than 100 from numeric
+    type to spelled-out words, as strings.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; ntw(44)
+    &gt;&gt;&gt; &#34;XLIV&#34;
+    
+    Parameters
+    ----------
+    n : int
+        1 &lt;= int(x) &lt;= 99
+    
+    Returns
+    -------
+    str
+        Roman Numeral equivalent
+    &#34;&#34;&#34;
+    numbers_to_words = {
+        1: &#34;I&#34;,
+        2: &#34;II&#34;,
+        3: &#34;III&#34;,
+        4: &#34;IV&#34;,
+        5: &#34;V&#34;,
+        6: &#34;VI&#34;,
+        7: &#34;VII&#34;,
+        8: &#34;VIII&#34;,
+        9: &#34;IX&#34;,
+        10: &#34;X&#34;,
+        20: &#34;XX&#34;,
+        30: &#34;XXX&#34;,
+        40: &#34;XL&#34;,
+        50: &#34;L&#34;,
+        60: &#34;LX&#34;,
+        70: &#34;LXX&#34;,
+        80: &#34;LXXX&#34;,
+        90: &#34;XC&#34;,
+        100: &#34;C&#34;,
+        0: &#34;&#34;,
+    }
+    try:
+        return numbers_to_words[n]
+    except KeyError:
+        try:
+            return numbers_to_words[n - n % 10] + numbers_to_words[n % 10]
+        except KeyError:
+            return &#34;[error:Number out of range]&#34;</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.parallelized_dfapply_concat"><code class="name flex">
+<span>def <span class="ident">parallelized_dfapply_concat</span></span>(<span>file_list, jobs=9, drop_blank_cols=True, tab_delimited_input=True, max_cols=1000)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Parallelized dataframe concatenation via concomitant
+reading in of multiple files.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file_list</code></strong> :&ensp;<code>list</code></dt>
+<dd>List of <str> file paths.</dd>
+<dt><strong><code>jobs</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of workers in multiprocessing pool to spawn.</dd>
+<dt><strong><code>drop_blank_cols</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Do not return entirely null column variates.</dd>
+<dt><strong><code>tab_delimited_input</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Assumes tab separated data unless explicitly specified
+otherwise.</dd>
+<dt><strong><code>max_cols</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Cutoff to stop reading (horizontally) tabular input data</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>Single aggregated df</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parallelized_dfapply_concat(
+        file_list,
+        jobs=((mp.cpu_count() * 2) + 1),
+        drop_blank_cols=True,
+        tab_delimited_input=True,
+        max_cols=1000,
+):
+    &#34;&#34;&#34;Parallelized dataframe concatenation via concomitant
+    reading in of multiple files.
+
+    Parameters
+    ----------
+    file_list : list
+        List of &lt;str&gt; file paths.
+    jobs : int, optional
+        Number of workers in multiprocessing pool to spawn.
+    drop_blank_cols : bool, optional
+        Do not return entirely null column variates.
+    tab_delimited_input : bool, optional
+        Assumes tab separated data unless explicitly specified
+        otherwise.
+    max_cols : int, optional
+        Cutoff to stop reading (horizontally) tabular input data
+
+    Returns
+    -------
+    pd.DataFrame
+        Single aggregated df
+
+    &#34;&#34;&#34;
+
+    def df_reader(filename, max_cols=max_cols):
+        &#34;&#34;&#34;Read input data from an Excel (.xlsx) file,
+        comma-separated raw text file; or else assumes
+        tab-delimited raw text input.
+
+        Parameters
+        ----------
+        filename : str
+            Full path to file
+        max_cols : int, optional
+            Defaults to 1000
+
+        Returns
+        -------
+        pd.DataFrame
+        &#34;&#34;&#34;
+        if filename.endswith(&#34;.xlsx&#34;):
+            return pd.read_excel(filename, usecols=max_cols)
+        elif filename.endswith(&#34;.csv&#34;) and not tab_delimited_input:
+            return pd.read_csv(filename, usecols=max_cols)
+        else:
+            return pd.read_csv(filename, sep=&#34;\t&#34;, usecols=max_cols)
+
+    with mp.Pool(jobs) as p:
+        dfs = p.map(df_reader, file_list)
+        df = pd.concat(dfs)
+
+    if drop_blank_columns:
+        df = df.dropna(axis=1, how=&#34;all&#34;)
+
+    return df</code></pre>
+</details>
+</dd>
+<dt id="dash-webapp-template.seqapp.utils.today"><code class="name flex">
+<span>def <span class="ident">today</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Current date in YYYYMMDD format.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; today()
+'20180924'
+</code></pre>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>pure alphanumeric date - today</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def today():
+    &#34;&#34;&#34;Current date in YYYYMMDD format.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; today()
+    &#39;20180924&#39;
+    
+    Returns
+    -------
+    str
+        pure alphanumeric date - today
+    
+    &#34;&#34;&#34;
+    return now()[:8]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#u-t-i-l-s-apputils">U T I L S
+|
+app.utils</a></li>
+<li><a href="#attributes">Attributes</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dash-webapp-template.seqapp" href="index.html">dash-webapp-template.seqapp</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dash-webapp-template.seqapp.utils.add_logfile" href="#dash-webapp-template.seqapp.utils.add_logfile">add_logfile</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.convert_html_to_dash" href="#dash-webapp-template.seqapp.utils.convert_html_to_dash">convert_html_to_dash</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.convert_numerics" href="#dash-webapp-template.seqapp.utils.convert_numerics">convert_numerics</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.file_download_link" href="#dash-webapp-template.seqapp.utils.file_download_link">file_download_link</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.filesafe_ctime" href="#dash-webapp-template.seqapp.utils.filesafe_ctime">filesafe_ctime</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.find_unique_ID" href="#dash-webapp-template.seqapp.utils.find_unique_ID">find_unique_ID</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.get_output_files" href="#dash-webapp-template.seqapp.utils.get_output_files">get_output_files</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.initiate_logging" href="#dash-webapp-template.seqapp.utils.initiate_logging">initiate_logging</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.largest_substr" href="#dash-webapp-template.seqapp.utils.largest_substr">largest_substr</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.ljoin" href="#dash-webapp-template.seqapp.utils.ljoin">ljoin</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.make_randuid" href="#dash-webapp-template.seqapp.utils.make_randuid">make_randuid</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.now" href="#dash-webapp-template.seqapp.utils.now">now</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.ntw" href="#dash-webapp-template.seqapp.utils.ntw">ntw</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.parallelized_dfapply_concat" href="#dash-webapp-template.seqapp.utils.parallelized_dfapply_concat">parallelized_dfapply_concat</a></code></li>
+<li><code><a title="dash-webapp-template.seqapp.utils.today" href="#dash-webapp-template.seqapp.utils.today">today</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
