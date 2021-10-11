@@ -9,14 +9,15 @@ Thus >90% of this full-stack web app is able to be written all in Python, signif
 
 ### Useful References
 1) [Plotly](https://plotly.com/)
-2) [Plotly's new web framework Dash* (v1.0 released in 2019†)](https://plotly.com/dash/)
+2) [Plotly's new web framework Dash＊ (v1.0 released in 2019†)](https://plotly.com/dash/)
 3) [Dash gallery](https://dash.gallery/Portal/)
 4) [Dash docs](https://dash.plotly.com/)
 5) [Plotly docs](https://plotly.com/python/)
 
-> *A Note on Plotly's clear emphasis on their "Enterprise" services offerings: this template provided here is essentially intended to bypass entirely the need for using the enterprise services. It is definitely possible for a single person to be data scientist + full-stack developer + devops engineer (though admiteddly that could get very difficult depending on the number of users; as a personal aside, my previous work experience has always involved very small numbers of users - a dozen at most - from the R&D departments of biotech companies). Surely, I bet the Dash Enterprise product is one worth considering, depending on the organization and their needs, etc. But it's incredible what all can be done freely just from the open-source provided code. (Thank you Plotly Dash for intelligently embracing open source!)
+＊ _*A Note on Plotly's clear emphasis on their "Enterprise" services offerings:*_ 
+> _This template provided here is essentially intended to bypass entirely the need for using the enterprise services. It is definitely possible for a single person to be data scientist + full-stack developer + devops engineer (though admittedly that could get very difficult depending on the number of users; as a personal aside, my previous work experience has always involved very small numbers of users - a dozen or so at most - from the R&D departments of biotech companies). Surely, I bet the Dash Enterprise product is one worth considering, depending on the organization and their needs, etc. But nonetheless it's incredible what all can be done freely just from the open-source provided code. (Thank you Plotly Dash for intelligently embracing open source!) To be clear this template does **not** require paying for Dash Enterprise (or anything else; it's totally free and open source)._
 
-> † https://community.plotly.com/t/welcoming-dash-1-0-0/25148
+† https://community.plotly.com/t/welcoming-dash-1-0-0/25148
 
 # App Template Overview
 ## Main app page begins with user log-in
