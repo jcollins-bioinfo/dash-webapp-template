@@ -1,17 +1,21 @@
-"""This file allows for the following execution:
+"""Development-level deployment ("DEBUG-MODE")
 
-	> python -m app
+This file allows for the following execution:
+
+	>$ python -m app
 
 where `app` is the super package (top-level module) housed at:
 	/var/www/Apps/dash-webapp-template
 
-    (so in this case 'seqapp')
+    (so in this case 'seqapp'):
+
+    >$ python -m seqapp
 .
 
 """
 import logging
 
-from .deploy import app, server
+from deploy import app, server
 
 if __name__ == "__main__":
     app.logger.setLevel(logging.DEBUG)
