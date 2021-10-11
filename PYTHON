@@ -1,0 +1,16 @@
+16	0	./__init__.py
+21	16	./__main__.py
+244	37	./deploy.py
+101	281	./seqapp/__init__.py
+21	382	./seqapp/__main__.py
+0	403	./seqapp/assets/__init__.py
+283	403	./seqapp/bioinfo/pipeline.py
+0	686	./seqapp/bioinfo/visualization.py
+1634	686	./seqapp/callbacks.py
+306	2320	./seqapp/config/__init__.py
+26	2626	./seqapp/layout.py
+763	2652	./seqapp/tabs/main_page.py
+574	3415	./seqapp/utils.py
+27	3989	./seqapp/wsgi.py
+--------
+4016
