@@ -1,5 +1,5 @@
 # dash-webapp-template
-Template for expediting creation of new dash web apps in Python, specifically for Biofinformatics-based projects (hence the demo name `seqapp`).
+Template for expediting creation of new dash web apps in Python, specifically for Biofinformatics-based projects (hence the demo name `seqapp`). Using `dash` in Python allows a developer to create a "full-stack" highly customizable web application enormously faster than previous standard professional practices, while still delivering utmost professional quality data science software solutions in the form of easy-to-use (and fast) web app UIs with as complex as possibly could be Python-coded backends hidden away but all neatly together in the same single relatively small collection of software files. See references below to learn more about the exciting paradigm shifting changes and accelerations in possible software development Dash has brought about!
 
 This particular template contains a custom-branded (CSS/HTML) base UI layout presenting a UX for a two-step pipeline of any sort. For example, in "Step One", several dynamically linked (interdependent) dropdown menus allow a user to select certain data as input. And then "Step Two" allows for user upload of files (as/if applicable) and launching of a custom analysis pipeline which would be a backend python source code. 
 
@@ -7,6 +7,18 @@ Also included are the configuration files for deploying the app using gunicorn a
 
 Thus >90% of this full-stack web app is able to be written all in Python, significantly speeding up the required time to create new apps as new ideas / requests for automated UI (i.e., codeless/for non-developers; e.g. wetlab scientists, QC team, mfg, etc.) tools arise. 
 
+### Useful References
+1) [Plotly](https://plotly.com/)
+2) [Plotly's new web framework Dash* (v1.0 released in 2019†)](https://plotly.com/dash/)
+3) [Dash gallery](https://dash.gallery/Portal/)
+4) [Dash docs](https://dash.plotly.com/)
+5) [Plotly docs](https://plotly.com/python/)
+
+> *A Note on Plotly's clear emphasis on their "Enterprise" services offerings: this template provided here is essentially intended to bypass entirely the need for using the enterprise services. It is definitely possible for a single person to be data scientist + full-stack developer + devops engineer (though admiteddly that could get very difficult depending on the number of users; as a personal aside, my previous work experience has always involved very small numbers of users - a dozen at most - from the R&D departments of biotech companies). Surely, I bet the Dash Enterprise product is one worth considering, depending on the organization and their needs, etc. But it's incredible what all can be done freely just from the open-source provided code. (Thank you Plotly Dash for intelligently embracing open source!)
+
+> † https://community.plotly.com/t/welcoming-dash-1-0-0/25148
+
+# App Template Overview
 ## Main app page begins with user log-in
 > Thus creating per-session output directories where all uploaded and newly generated data files will be saved server-side, and available from the UI during the session for the user to filter through and select any they'd like the download.
 <img width="1441" alt="top of app screenshot after user log in" src="https://user-images.githubusercontent.com/28764103/136808235-446142f7-66fc-44b6-a5d8-25c436d31ebb.png">
