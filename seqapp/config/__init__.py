@@ -171,8 +171,8 @@ url_safe = lambda u: re.sub("[:*\/]", "-", u)
 
 
 
-
-###           I I  -  S T A T I C   G L O B A L   V A R S
+###           I I  -  S T A T I C   G L O B A L   D A T A  
+#                      (CONSTANTS - DO NOT CHANGE)
 
 CURRENT_YEAR = dt.datetime.today().year
 
@@ -184,29 +184,6 @@ APP_NAME = "seqapp" # NOTE: Change this!
 TOP_DIR = path.join(*path.split(APP_HOME)[:-1])
 GUNICORN_STDERR = f"{APP_HOME}/{APP_NAME}/app/prod/gunicorn/logs/{today()}"
 RUN_OUTPUT_DIR = f"{APP_HOME}/{APP_NAME}/app/prod/sessions"
-
-#
-#  ---| APP USER ACCOUNTS
-# (NOTE:VARIABLE COMPONENT CONFIG)
-#
-USERS = [{
-    "label": "—Select Your Name—",
-    "value": "None"
-}] + sorted(
-    [
-        # {"label": "__(Add me!)", "value": "ADD_REQUEST"},
-        {
-            "label": "John C",
-            "value": "JOHN_COLLINS"
-        },
-        {
-            "label": "_Guest",
-            "value": "ANON_GUEST"
-        },
-    ],
-    key=lambda d: d["label"],
-)
-USERS_REALNAMES = {u["value"]: u["label"].split()[0] for u in USERS}
 
 entity_schemas = pd.read_csv(f"{APP_HOME}/{APP_NAME}/assets/data/entity-schemas.csv", sep='\t')
 #
@@ -295,3 +272,35 @@ output_filetype_genres = {
     "REF":
     tuple([".fasta", ".gb"]),
 }
+
+
+###       I I I  -  D Y N A M I C   G L O B A L   D A T A
+#             (VARIABLE - YOU MAY NEED TO CHANGE THESE)
+
+#  ---| APP USER ACCOUNTS
+# (NOTE:VARIABLE COMPONENT CONFIG)
+#
+USERS = sorted(
+    [
+        # {"label": "__(Add me!)", "value": "ADD_REQUEST"},
+        {
+            "label": "John C",
+            "value": "JOHN_COLLINS"
+        },
+        {
+            "label": "User A",
+            "value": "USER_A"
+        },
+        {
+            "label": "User B",
+            "value": "USER_B"
+        },
+        {
+            "label": "_Guest",
+            "value": "ANON_GUEST"
+        },
+    ],
+    key=lambda d: d["label"],
+)
+USERS_REALNAMES = {u["value"]: u["label"].split()[0] for u in USERS}
+

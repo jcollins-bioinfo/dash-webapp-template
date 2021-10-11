@@ -14,7 +14,7 @@
 #toc_container li, #toc_container ul, #toc_container ul li{list-style:outside none none!important}
 #toc_container{background:#f9f9f9 none repeat scroll 0 0;border:1px solid #aaa;display:inline-block;font-size:80%;padding:20px;text-align:left!important;box-shadow:-1px 1px 6px 0px #0000005e;column-count:2;min-height: 300px; column-rule: ridge #cecece17 3px; break-inside: avoid; column-gap: 2.5rem;}
 #user-status > span > a{color:goldenrod;}
-#user-status{background:#00000073;font-style:normal;font-weight:400;padding:0.15% 1% 0.35% 1.15%;margin:2px;border-radius:30px;margin:0.5%;width:60%;}
+#user-status{background:#00000073;font-style:normal;font-weight:400;padding:0.15% 1% 0.35% 1.15%;margin:2px;border-radius:30px;margin:0.5%;width:fit-content;}
 
 .ACHAINADNA:hover, .ACHAINCDNA:hover, .ACHAINGDNA:hover, .ACHAINTDNA:hover, .ACHAINADNA:focus, .ACHAINCDNA:focus, .ACHAINGDNA:focus, .ACHAINTDNA:focus{color:#09d8d4!important;cursor:pointer;transition-duration:4.75 s!important;transition-property:transform!important}
 .ACHAINADNA:hover:before, .ACHAINCDNA:hover:before, .ACHAINGDNA:hover:before, .ACHAINTDNA:hover:before, .BCHAINADNA:hover:before, .BCHAINCDNA:hover:before, .BCHAINGDNA:hover:before, .BCHAINTDNA:hover:before, .ACHAINADNA:focus:before, .ACHAINCDNA:focus:before, .ACHAINGDNA:focus:before, .ACHAINTDNA:focus:before, .BCHAINADNA:focus:before, .BCHAINCDNA:focus:before, .BCHAINGDNA:focus:before, .BCHAINTDNA:focus:before{pointer-events:none;position:absolute;z-index:-1;content:'';opacity:.75;color:radial-gradient(ellipse at center,rgba(0,0,0,.11) 50 %,rgba(0,0,0,0.30) 90 %)!important;transition-duration:8s;transition-property:transform opacity 0.95}

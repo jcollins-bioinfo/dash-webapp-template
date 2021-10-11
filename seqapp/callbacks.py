@@ -231,13 +231,13 @@ def confirm_new_session(
                                 className="fader-line-short", style={"marginBottom": "20px"}
                             ),
                             html.P("You're all set!"),
-                            html.H6(f"Sign-on Timestamp: {log_t_init.split('=')[1]}", style={"fontSize": "0.75rem"}),
+                            html.H6(f"Sign-on Timestamp: {log_t_init.split('=')[1]}", style={"fontSize": "0.65rem"}),
                             html.P(
-                                f"Current RUN ID:\t{RUN_ID}",
+                                f"Session ID:\t{RUN_ID}",
                                 style={
-                                    "animation": "anim-text-flow-keys 10s infinite linear",
+                                    "animation": "anim-text-flow-keys 60s infinite linear",
                                     "mixBlendMode": "difference",
-                                    "fontSize": "0.9rem",
+                                    "fontSize": "0.7rem",
                                 },
                             ),
                         ],

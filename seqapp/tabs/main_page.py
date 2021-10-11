@@ -115,7 +115,7 @@ navbar = [
                         html.Span(
                             html.A(
                                 ["⁂ Sign In"],
-                                style={"fontSize": "80%", "color": "goldenrod"},
+                                style={"fontSize": "80%", "color": "goldenrod", "width": "fit-content"},
                                 href=f"#log-in-below",
                             )
                         )
@@ -233,7 +233,7 @@ components_list = [
                         },
                     ),
                     html.Pre(
-                        "◖𓇃𓇃𓇃𓇃𓇃𓏣🜾𓏣𓇃𓇃𓉽𓇃𓐩𓋥⸶⸷𓋥𓐩𓇃𓇃𓇃𓋏𓇃𓇃𓇃˥⎡𓇃𓇃࿅𓇃𓊢ꃊ𓊢𓇃𓇃𓇃𓇃ⴶ〰⸅‖⸄〰ж𓇃𓇃𓇃𓇃𓇃𓏟𓏞𓇃𓇃𓇃𓇃𓋅𓆬𓆬𓋅𓇃𓇃𓇃𓇊𓊢𓇊𓇃𓇃𓇃𓉽𓇃ண⎤꜒𓇃𓇃𓇃𓇃𓇃࿑◗",
+                        "◖𓇃𓇃𓇃𓏣🜾𓏣𓇃𓇃𓉽𓇃𓐩𓋥⸶⸷𓋥𓐩𓇃𓋏𓇃˥⎡𓇃𓇃࿅𓇃𓊢ꃊ𓊢𓇃𓇃𓇃ⴶ〰⸅‖⸄〰ж𓇃𓇃𓏟𓏞𓇃𓇃𓇃𓇃𓋅𓆬𓆬𓋅𓇃𓇃𓇊𓊢𓇊𓇃𓉽𓇃ண⎤꜒𓇃𓇃࿑◗",
                         style={
                             "filter": "blur(.4pt)",
                             "color": "#584e00a8",
@@ -244,10 +244,10 @@ components_list = [
                         },
                     ),
                     html.Pre(
-                        "◖𓇃𓇃𓇃𓇃⸠⎫𓏉⎧⸡𓇃𓇃𓇃𓇃𓇃⸣⸠࿇⸡⸢𓇃𓇃𓇃𓇃⎨⎬𓇃𓇃𓇃𓇃𓇃𓉽𓋏𓉽𓇃𓇃𓇃ཥ⅌ཤ𓇃𓇃𓇃𓇃𓍰𓇃𓇃𓇃𓇃𓇃ཀཫ𓇃𓇃𓇃╗╔𓇃𓇃𓇃𓇃⦄༽⸶⸷༼⦃𓇃𓇃𓇃𓇃◗",
+                        "◖𓇃𓇃𓇃𓇃⸠⎫𓏉⎧⸡𓇃𓇃𓇃𓇃⸣⸠࿇⸡⸢𓇃𓇃𓇃𓇃⎨⎬𓇃𓇃𓇃𓉽𓋏𓉽𓇃𓇃ཥ⅌ཤ𓇃𓇃𓇃𓍰𓇃𓇃𓇃𓇃ཀཫ𓇃𓇃𓇃╗╔𓇃𓇃⦄༽⸶⸷༼⦃𓇃𓇃𓇃◗",
                         style={
                             "marginTop": "-1.5%",
-                            "fontSize": "1.8rem",
+                            "fontSize": "1.55rem",
                             "color": "#AEA46E",
                         },
                     ),
