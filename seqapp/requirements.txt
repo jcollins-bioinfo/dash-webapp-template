@@ -8,6 +8,7 @@ coloredlogs==10.0
 dash==2.0.0
 dash_bio==0.7.1
 dataclasses==0.8
+deploy==1.9.1
 ftfy==5.5.0
 matplotlib==3.0.2
 numpy==1.15.4

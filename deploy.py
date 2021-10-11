@@ -34,12 +34,14 @@ import random
 
 from dash import dcc
 from dash import html
-from dash.dependencies import Input, Output, State
+
+from dash.dependencies import Input
+from dash.dependencies import Output
+from dash.dependencies import State
+
 from dash.exceptions import PreventUpdate
 
-
 from seqapp import app # NOTE: `app.app` should be changed to `[your new app name].app` !
-                        #        I.e., Don't forget to change the top-level package name.
 from seqapp import callbacks
 from seqapp.layout import children as page_layout
 from seqapp.utils import convert_html_to_dash
@@ -80,11 +82,11 @@ quotes += [("Albert Einstein", q) for q in [
 )
 def display_page(pathname, href, current_page):
     """Activated upon url change, *react*ively returning new page components,
-    as applicable. (I.e., User's browser tab does not ac­tu­ally re­load when
-    chang­ing URL - un­less of course it is the first load or a re­load of the
-    stan­dard base ap­pli­ca­tion URL; ap­plic­a­ble pro­grammed changes are
-    re­turned for cer­tain ex­pected non-stan­dard, spe­cific URL href path
-    ex­ten­sions.)
+    as applicable. (I.e., User's browser tab does not actually reload when
+    changing URL - unless of course it is the first load or a reload of the
+    standard base application URL; applicable programmed changes are
+    returned for certain expected non-standard, specific URL href path
+    extensions.)
 
 
     Callbacks
@@ -156,7 +158,7 @@ def display_page(pathname, href, current_page):
             ).split("🌊")
             return html.Div([convert_html_to_dash(parse_404[0])] + [
                 html.Img(
-                    src="assets/images/",
+                    src="seqapp/assets/images/",
                     style={
                         "width": "40%",
                         "opacity": "0.75",

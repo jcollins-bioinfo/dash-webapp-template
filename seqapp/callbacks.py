@@ -231,8 +231,7 @@ def confirm_new_session(
                                 className="fader-line-short", style={"marginBottom": "20px"}
                             ),
                             html.P("You're all set!"),
-                            html.H6(f"Sign-on Timestamp:"),
-                            html.H4(f"{log_t_init.split('=')[1]}"),
+                            html.H6(f"Sign-on Timestamp: {log_t_init.split('=')[1]}", style={"fontSize": "0.75rem"}),
                             html.P(
                                 f"Current RUN ID:\t{RUN_ID}",
                                 style={

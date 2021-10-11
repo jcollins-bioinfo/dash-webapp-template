@@ -41,4 +41,4 @@ section.wrapper{padding:10px 0}
 span.menubar-title:hover{color:rgb(13,4,145)!important}
 summary:focus{outline:none!important}
 summary{cursor:pointer}
-ul.updates-list > li{margin-bottom:5px;padding-left:4%;margin-left:18%;margin-right:16%;list-style-type:lower-roman;list-style-position:outside}
+ol.updates-list > li{margin-bottom:5px;padding-left:3%;margin-left:8%;margin-right:5%;list-style-type:auto;list-style-position:outside}

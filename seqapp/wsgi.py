@@ -1,16 +1,28 @@
-import os
-import sys
+"""
+WSGI
+----
+Web Service Gateway Interface
 
-gunicorn_wd = os.path.dirname(os.path.realpath(__file__))
-print(gunicorn_wd, file=sys.stderr)
+Deployment of the app in "production" mode.
 
-sys.path.append(gunicorn_wd)
-
-from seqapp import app
-from deploy import server
+"""
 
 if __name__ == "__main__":
+
+    import os
+    import sys
+
+    from deploy import server
+    from seqapp import app
+
+
+    gunicorn_wd = os.path.dirname(os.path.realpath(__file__))
+    print(gunicorn_wd, file=sys.stderr)
+
+    sys.path.append(gunicorn_wd)
+
     app.logger.info(
-        "John Collins 2021 - Bioinformatics | dash-webapp-template : RUN SERVER (Production)"
+        "John Collins 2021 - Bioinformatics | dash-webapp-template :"
+        " RUN SERVER (Production)"
     )
     server.run()
