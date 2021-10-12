@@ -10,7 +10,7 @@ PORT=${1:-9001}
 NUM_WORKERS=${2:-17}
 THREADS=${3:-8}
 
-GUNICORN_PROD_LOGS="./app/prod/gunicorn/logs/${TODAY}"
+GUNICORN_PROD_LOGS="./seqapp/app/prod/gunicorn/logs/${TODAY}"
 mkdir -p $GUNICORN_PROD_LOGS
 
 gunicorn \

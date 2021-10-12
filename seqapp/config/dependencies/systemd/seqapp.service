@@ -1,0 +1,32 @@
+# dash-webapp-template example Web Application Daemon
+#
+# NOTES
+# -----
+# Prev. used [potentially useful] gunicorn options:
+#   --logfile
+#	--capture-output
+#
+# Removed from [Service]:
+# 	PrivateTmp=true
+#
+
+[Unit]
+Description=gunicorn daemon for dash-webapp-template
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+PIDFile=/run/gunicorn/pid
+User=jcollins
+Group=www-data
+RuntimeDirectory=gunicorn
+WorkingDirectory=/var/www/Apps/dash-webapp-template/seqapp
+EnvironmentFile=/var/www/Apps/dash-webapp-template/seqapp/.keys/dashwebapp.env
+ExecStartPre=/bin/bash -c '/var/www/Apps/dash-webapp-template/seqapp/prod/sessions/.update_sessions_log.sh'
+ExecStart=/Volumes/Macintosh\ Flash\ \(25GB\)/opt/anaconda3/bin/gunicorn -w 1 --worker-class gthread --threads 8 --name "dash-webapp-template.AutoStartService" --pid /run/gunicorn/pid --bind unix:/run/gunicorn/socket --log-level INFO --access-logfile /var/www/Apps/dash-webapp-template/seqapp/prod/gunicorn/logs/SSQC_GUNICORN_ACCESS.log wsgi:server
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+TimeoutSec=1200
+
+[Install]
+WantedBy=multi-user.target

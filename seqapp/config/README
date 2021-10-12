@@ -9,16 +9,16 @@ File Tree
 
 	
 	./nginx:
-5		nginx.conf
+2		nginx.conf
 
 	./sessions:
-6		Application--Info.html
-7		sessions.php
-8		update_sessions_log.sh
+3		Application--Info.html
+4		sessions.php
+5		update_sessions_log.sh
 
 	./systemd:
-9		gunicorn.socket
-10		dash-webapp-template-seqapp.service
+6		gunicorn.socket
+7		dash-webapp-template-seqapp.service
 
 
 
@@ -28,41 +28,41 @@ File Descriptions
 #1	Primary configuration file for "seqapp" application.
 
 
+#2: NGINX
+	A copy of the nginx config file used for establishing HTTP 
+	access to the app-hosting server.
 
-#5: NGINX
-	#5	A copy of the nginx config file used for establishing HTTP 
-		access to the app-hosting server.
-
-#6-8: Sessions Results Viewer
+#3-5: Sessions Results Viewer
 	Scripts & files composing the user-accessible HTTP-based web
 	browsing of all "seqapp"-generated analysis results files by date and 
 	"seqapp" RUN ID (these are copies; the real files are ran under 
 	/dash-webapp-template/seqapp/prod/sessions/, where the original raw per-session
 	results file are written to).
 
-	#6	A simple static HTML file which displays basic info about the 
+	#3	A simple static HTML file which displays basic info about the 
 		http://apps01:9000/ "seqapp" Run Sessions directory viewing ser-
 		vice.
 
-	#7	A custom PHP script for generating a dynamic HTML file
+	#4	A custom PHP script for generating a dynamic HTML file
 
-	#8	A shell script which is executed as a "PREEXEC" statement
+	#5	A shell script which is executed as a "PREEXEC" statement
 		via the custom dash-webapp-templateseq systemd service, which updates
 		the /dash-webapp-template/seqapp/prod/sessions/.sessions.log file by
 		appending any/all latest new "seqapp" user sessions using
 		'"seqapp" RUN ID'.
 
-#9-10: Systemd config files
 
-	#9	A short config file for gracefully auto-restarting the app
+#6-7: Systemd config files
+
+	#6	A short config file for gracefully auto-restarting the app
 		if app URL is accessed and the service isn't already running
 		(potentially deprecated; this socket is referenced in the
 		nginx.conf).
 
-	#10	The custom systemd configuration file dash-webapp-template-seqapp.service
+	#7	The custom systemd configuration file dash-webapp-template-seqapp.service
 		which creates an eponymous linux systemd daemon service
 		to ensure graceful restart of the "seqapp" app upont machine
 		reboot, and which contains 'PREEXEC' statements always
-		first running the scTCR data sync update and sessions
+		first running the data sync update and sessions
 		viewer update mini-pipeline programs.
 

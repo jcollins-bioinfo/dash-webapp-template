@@ -1,0 +1,8 @@
+[Unit]
+Description=gunicorn socket for dash-webapp-template webapp
+
+[Socket]
+ListenStream=/run/gunicorn/seqapp/socket
+
+[Install]
+WantedBy=sockets.target
